@@ -1,0 +1,147 @@
+#server:
+#  port: 8081
+#
+#spring:
+#  application:
+#    name: auth-service
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/auth_db
+#    username: postgres
+#    password: postgres
+#    driver-class-name: org.postgresql.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        format_sql: true
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:8080/realms/master
+#          jwk-set-uri: http://localhost:8080/realms/master/protocol/openid-connect/certs
+#
+#keycloak:
+#  server-url: http://localhost:8080
+#  realm: master
+#  client-id: auth-service
+#  client-secret: votre_secret_keycloak
+#
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka/
+#  instance:
+#    prefer-ip-address: true
+
+#server:
+#  port: 8081
+#
+#spring:
+#  application:
+#    name: auth-service
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/auth_db
+#    username: postgres
+#    password: postgres
+#    driver-class-name: org.postgresql.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        format_sql: true
+#  security:
+#    jwt:
+#      secret: votre_cle_secrete_jwt_doit_etre_longue_et_complexe
+#      expiration: 86400000  # 24 heures en millisecondes
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:8080/realms/master
+#          jwk-set-uri: http://localhost:8080/realms/master/protocol/openid-connect/certs
+#
+#keycloak:
+#  server-url: http://localhost:8080
+#  realm: master
+#  client-id: auth-service
+#  client-secret: votre_secret_client_keycloak  # Remplacez par le vrai secret obtenu de Keycloak
+#
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka/
+#  instance:
+#    prefer-ip-address: true
+
+#/////////
+server:
+  port: 9090
+
+spring:
+  application:
+    name: auth-service
+  mvc:
+    cors:
+      mapping: "/**"
+      allowed-origins: "http://localhost:4200"
+      allowed-methods: "*"
+      allowed-headers: "*"
+      allow-credentials: true
+      max-age: 3600
+  datasource:
+    url: jdbc:postgresql://localhost:5433/auth_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        hbm2ddl:
+          auto: create-drop
+  # Désactivation de la config OAuth2 Resource Server pour éviter validation JWT sur /api/auth/login
+  # security:
+  #   oauth2:
+  #     resourceserver:
+  #       jwt:
+  #         issuer-uri: http://localhost:8080/realms/auth-service
+  #         jwk-set-uri: http://localhost:8080/realms/auth-service/protocol/openid-connect/certs
+
+# Configuration Keycloak
+keycloak:
+  server-url: http://localhost:8080
+  realm: auth-service
+  client-id: auth-service-client
+  client-secret: XI0lBNXGNBVPuFrLtDbXscTjP18YX4KX
+
+# Configuration Eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+# Configuration des logs
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.keycloak: DEBUG
+    com.example.authservice: DEBUG
+    org.sid.authservice: DEBUG
+    org.springframework.context: DEBUG
+    org.springframework.boot.web.servlet.context: DEBUG
+
+#  docker exec -it auth-postgres psql -U postgres -d auth_db

@@ -1,0 +1,62 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h2>Connexion</h2>
+      <p>Bienvenue sur CREapp</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+        <label for="username">Nom d'utilisateur</label>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          placeholder="Entrez votre nom d'utilisateur"
+          [class.is-invalid]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
+        />
+        <div class="invalid-feedback" *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+          Le nom d'utilisateur est requis
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Entrez votre mot de passe"
+          [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+        />
+        <div class="invalid-feedback" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          Le mot de passe est requis
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Remplacer la section de mode d'authentification -->
+      <div class="auth-mode-info">
+        <small>Mode d'authentification: <strong>Keycloak (Nouveau)</strong></small>
+        <!-- Supprimer le bouton de bascule ou le rendre invisible -->
+      </div>
+
+      <!-- Change isLoading to loading in the button's disabled attribute -->
+      <button type="submit" class="login-button" [disabled]="loginForm.invalid || loading">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+        Se connecter
+      </button>
+    </form>
+  </div>
+</div>
+
+<div class="text-center mt-3">
+  <a routerLink="/auth/forgot-password" class="text-secondary">Mot de passe oublié ?</a>
+</div>
+<div class="text-center mt-2">
+  <span>Pas de compte ?</span>
+  <a routerLink="/auth/register" class="text-primary">Créer un compte</a>
+</div>

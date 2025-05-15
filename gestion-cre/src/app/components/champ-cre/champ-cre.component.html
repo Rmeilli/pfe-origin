@@ -1,0 +1,83 @@
+<!--champ-cre.component.html-->
+<div class="container mt-4">
+  <h4 class="text-center">
+    Définition des Champs pour la structure {{ structureName }} (Mode : {{ mode === 'view' ? 'Consultation' : 'Modification' }})
+  </h4>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <table class="table table-bordered mt-3">
+    <thead class="table-dark">
+    <tr>
+      <th>#</th>
+      <th>Nom de zone*</th>
+      <th>Pos*</th>
+      <th>Long*</th>
+      <th>Déc</th>
+      <th>Format*</th>
+      <th>Désignation</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let champ of champs; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>
+        <input type="text" class="form-control" [(ngModel)]="champ.nomZone" [readonly]="mode === 'view'">
+      </td>
+      <td>
+        <input type="number" 
+               class="form-control" 
+               [(ngModel)]="champ.pos" 
+               [readonly]="mode === 'view'"
+               (ngModelChange)="onPositionChange(i, $event)">
+      </td>
+      <td>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="champ.longCol"
+          [readonly]="mode === 'view'"
+          (ngModelChange)="onLongColChange(i, $event, champ.longCol)"
+        >
+      </td>
+      <td>
+        <input type="number" class="form-control" [(ngModel)]="champ.dec" [readonly]="mode === 'view'">
+      </td>
+      <td>
+        <ng-container *ngIf="mode === 'view'; else editMode">
+          {{ champ.format }}
+        </ng-container>
+        <ng-template #editMode>
+          <select class="form-select" [(ngModel)]="champ.format">
+            <option value="">-- Sélectionner --</option>
+            <option value="TEXT">Texte</option>
+            <option value="NUMERIC">Numérique</option>
+            <option value="DECIMAL">Décimale</option>
+            <option value="DATETIME">Date/Heure</option>
+          </select>
+        </ng-template>
+      </td>
+
+      <td>
+        <input type="text" class="form-control" [(ngModel)]="champ.designationBcp" [readonly]="mode === 'view'">
+      </td>
+      <td>
+        <button class="btn btn-danger btn-sm" (click)="deleteChamp(i, champ)" *ngIf="mode === 'edit'">
+          Supprimer
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-success" (click)="addChamp()" *ngIf="mode === 'edit'">
+    + Ajouter un champ
+  </button>
+  <button class="btn btn-primary ms-2" (click)="saveChamps()" *ngIf="mode === 'edit'">
+    Enregistrer
+  </button>
+</div>
+

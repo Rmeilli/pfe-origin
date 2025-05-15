@@ -1,0 +1,37 @@
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#" i18n>Gestion CRE</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active" i18n>Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/structures" routerLinkActive="active" i18n>Structures</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/import" routerLinkActive="active" i18n>Importer</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/export" routerLinkActive="active" i18n>Exporter</a>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center">
+        <button *ngIf="isLoggedIn" class="btn btn-outline-light me-2" (click)="logout()" i18n>
+          Déconnexion
+        </button>
+        <app-language-selector></app-language-selector>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mt-4">
+<router-outlet></router-outlet>
+</div>
+

@@ -1,0 +1,69 @@
+package com.example.authservice.service;
+
+import com.example.authservice.model.User;
+import com.example.authservice.repository.UserRepository;
+import jakarta.annotation.PostConstruct;
+import org.keycloak.admin.client.Keycloak;
+import org.keycloak.admin.client.KeycloakBuilder;
+import org.keycloak.representations.idm.UserRepresentation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class KeycloakSyncService {
+
+    private static final Logger logger = LoggerFactory.getLogger(KeycloakSyncService.class);
+
+    @Value("${keycloak.server-url}")
+    private String serverUrl;
+
+    @Value("${keycloak.realm}")
+    private String realm;
+
+    @Value("${keycloak.client-id}")
+    private String clientId;
+
+    @Value("${keycloak.client-secret}")
+    private String clientSecret;
+
+    private final UserRepository userRepository;
+
+    public KeycloakSyncService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @PostConstruct
+    public void syncUsersFromKeycloak() {
+        logger.info("Starting synchronization of users from Keycloak");
+        try {
+            Keycloak keycloak = KeycloakBuilder.builder()
+                    .serverUrl(serverUrl)
+                    .realm(realm)
+                    .clientId(clientId)
+                    .clientSecret(clientSecret)
+                    .grantType("client_credentials")
+                    .build();
+
+            List<UserRepresentation> keycloakUsers = keycloak.realm(realm).users().list();
+            logger.info("Found {} users in Keycloak", keycloakUsers.size());
+
+            for (UserRepresentation keycloakUser : keycloakUsers) {
+                if (!userRepository.existsByUsername(keycloakUser.getUsername())) {
+                    User user = new User();
+                    user.setUsername(keycloakUser.getUsername());
+                    // Note: nous ne synchronisons pas le mot de passe car il est géré par Keycloak
+                    user.setPassword("[MANAGED BY KEYCLOAK]");
+                    userRepository.save(user);
+                    logger.info("Synchronized user: {}", keycloakUser.getUsername());
+                }
+            }
+            logger.info("User synchronization completed successfully");
+        } catch (Exception e) {
+            logger.error("Error during Keycloak user synchronization", e);
+        }
+    }
+} 

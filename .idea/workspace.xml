@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a84efce5-3c41-4918-97d4-b8b8f0208880" name="Changes" comment="commit du 15/05/2025 à 9h00">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dockerfile" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="72dcb96df918b35f5eb1003063c8e959eb1a2657" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2vUWYar6jfC8e6mbLEqcxEn2FPZ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "Spring Boot.AuthService1Application.executor": "Run",
+    "Spring Boot.AuthServiceApplication (1).executor": "Run",
+    "Spring Boot.AuthServiceApplication.executor": "Run",
+    "Spring Boot.CrEappApplication (1).executor": "Run",
+    "Spring Boot.CrEappApplication.executor": "Run",
+    "Spring Boot.EurekaServerApplication.executor": "Run",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "master",
+    "jdk.selected.JAVA_MODULE": "openjdk-22",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/User/Downloads/ProjetBp_micro_services/auth-service1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "Errors",
+    "ts.external.directory.path": "C:\\Users\\User\\Downloads\\ProjetBp_micro_services\\gestion-cre\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Downloads\ProjetBp_micro_services\auth-service" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.AuthService1Application">
+    <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="api-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.sid.apigateway.ApiGatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthService1Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="auth-service1" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.sid.authservice1.AuthService1Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthServiceApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="auth-service (1)" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.sid.authservice.AuthServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="auth-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.sid.authservice.AuthServiceApplication" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CrEappApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="cre-service (1)" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.sid.creapp.CrEappApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CrEappApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="cre-service (1)" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.sid.creapp.CrEappApplication" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EurekaServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="eureka-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.eurekaserver.EurekaServerApplication" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Spring Boot.AuthService1Application" />
+      <item itemvalue="Spring Boot.ApiGatewayApplication" />
+      <item itemvalue="Spring Boot.CrEappApplication (1)" />
+      <item itemvalue="Spring Boot.AuthServiceApplication (1)" />
+      <item itemvalue="Spring Boot.CrEappApplication" />
+      <item itemvalue="Spring Boot.AuthServiceApplication" />
+      <item itemvalue="Spring Boot.EurekaServerApplication" />
+    </list>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-22-openjdk-22-4caba194b151-f504ca98" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a84efce5-3c41-4918-97d4-b8b8f0208880" name="Changes" comment="" />
+      <created>1744200185870</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1744200185870</updated>
+      <workItem from="1744200187032" duration="10000" />
+      <workItem from="1744207856947" duration="4706000" />
+      <workItem from="1744270321569" duration="6284000" />
+      <workItem from="1744291560175" duration="3463000" />
+      <workItem from="1744357077095" duration="9760000" />
+      <workItem from="1744378947791" duration="970000" />
+      <workItem from="1744381606297" duration="3947000" />
+      <workItem from="1744554121785" duration="13843000" />
+      <workItem from="1744615267935" duration="9441000" />
+      <workItem from="1744638441253" duration="4197000" />
+      <workItem from="1744701700458" duration="2165000" />
+      <workItem from="1744704356957" duration="3846000" />
+      <workItem from="1744723069899" duration="3183000" />
+      <workItem from="1744788027691" duration="3614000" />
+      <workItem from="1744808594551" duration="3864000" />
+      <workItem from="1744874500018" duration="9673000" />
+      <workItem from="1744960477911" duration="935000" />
+      <workItem from="1744966170532" duration="623000" />
+      <workItem from="1744973218578" duration="304000" />
+      <workItem from="1744983489936" duration="763000" />
+      <workItem from="1745219896244" duration="593000" />
+      <workItem from="1745243420401" duration="581000" />
+      <workItem from="1745244067860" duration="1440000" />
+      <workItem from="1745245870369" duration="6162000" />
+      <workItem from="1745306384864" duration="8823000" />
+      <workItem from="1745327799560" duration="8091000" />
+      <workItem from="1745392872056" duration="3720000" />
+      <workItem from="1745413449390" duration="402000" />
+      <workItem from="1745500695073" duration="6596000" />
+      <workItem from="1745565684180" duration="1952000" />
+      <workItem from="1745588111392" duration="3130000" />
+      <workItem from="1746429609829" duration="2088000" />
+      <workItem from="1746450566542" duration="387000" />
+      <workItem from="1746516165201" duration="22000" />
+      <workItem from="1746516702893" duration="4167000" />
+      <workItem from="1746783812547" duration="655000" />
+      <workItem from="1746963930001" duration="2702000" />
+      <workItem from="1746969143050" duration="2876000" />
+      <workItem from="1747057524370" duration="2682000" />
+      <workItem from="1747060361592" duration="399000" />
+      <workItem from="1747062238872" duration="1002000" />
+      <workItem from="1747121134522" duration="1656000" />
+      <workItem from="1747208317315" duration="5367000" />
+      <workItem from="1747228023262" duration="3737000" />
+      <workItem from="1747295500252" duration="4703000" />
+      <workItem from="1747314231558" duration="1871000" />
+    </task>
+    <task id="LOCAL-00001" summary="commit du 23/04/2025 à 11h30">
+      <option name="closed" value="true" />
+      <created>1745404242848</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1745404242848</updated>
+    </task>
+    <task id="LOCAL-00002" summary="commit du 02/05/2025 à 11h30">
+      <option name="closed" value="true" />
+      <created>1746998202971</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1746998202972</updated>
+    </task>
+    <task id="LOCAL-00003" summary="commit du 12/05/2025 à 16h30">
+      <option name="closed" value="true" />
+      <created>1747063826822</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1747063826822</updated>
+    </task>
+    <task id="LOCAL-00004" summary="commit du 15/05/2025 à 9h00">
+      <option name="closed" value="true" />
+      <created>1747295592513</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1747295592514</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="commit du 23/04/2025 à 11h30" />
+    <MESSAGE value="commit du 02/05/2025 à 11h30" />
+    <MESSAGE value="commit du 12/05/2025 à 16h30" />
+    <MESSAGE value="commit du 15/05/2025 à 9h00" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit du 15/05/2025 à 9h00" />
+  </component>
+</project>

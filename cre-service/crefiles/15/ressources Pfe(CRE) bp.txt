@@ -1,0 +1,68 @@
+PTIOG(plateformes technologiques, innovation et opérations groupe)
+Bss(business solution and services)
+Temenos(core Banking opérations de banques) 
+Objectif:
+-gestion de système distribués t24 et legacy(mapping, les 2 doivent contenir les mêmes informations(Màj)) 
+-notre but principal: CRE out(càd de t24 à legacy)
+-transfère de fichiers CRE(non http)
+-respect de la table de validation
+-en se basant sur des tables cre (structures)
+-legacy et temenos
+-l'utilisateur peut declarer des structures( peut ajouter)
+-generer le CRE 
+-dans un premier temps, Le but est de permettre la saisie de structures CRE(les stocker dans la base de données et aussi de les charger et verifier la validité de tous les champs.
+
+
+
+
+
+Les tables: CREATE TABLE Utilisateur (
+    id SERIAL PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    mot_de_passe VARCHAR(255) NOT NULL,
+    role VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Structure_CRE (
+    id SERIAL PRIMARY KEY,
+    nom_zone VARCHAR(50) NOT NULL,
+    position INT NOT NULL,
+    longueur INT NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    description TEXT,
+    valeur_defaut VARCHAR(100)
+);
+
+CREATE TABLE Fichier_CRE (
+    id SERIAL PRIMARY KEY,
+    nom_fichier VARCHAR(255) NOT NULL,
+    date_import TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    utilisateur_id INT REFERENCES Utilisateur(id),
+    statut VARCHAR(50) NOT NULL,
+    contenu TEXT
+);
+
+CREATE TABLE Erreur_CRE (
+    id SERIAL PRIMARY KEY,
+    fichier_cre_id INT REFERENCES Fichier_CRE(id),
+    nom_zone VARCHAR(50) NOT NULL,
+    message TEXT NOT NULL,
+    correction TEXT
+);
+
+CREATE TABLE Fichier_Transforme (
+    id SERIAL PRIMARY KEY,
+    fichier_cre_id INT REFERENCES Fichier_CRE(id),
+    nom_fichier VARCHAR(255) NOT NULL,
+    date_transformation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    contenu TEXT
+);
+
+CREATE TABLE Logs (
+    id SERIAL PRIMARY KEY,
+    operation VARCHAR(100) NOT NULL,
+    utilisateur_id INT REFERENCES Utilisateur(id),
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    details TEXT
+);

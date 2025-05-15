@@ -1,0 +1,8 @@
+spring.application.name=auth-service
+server.port=8081
+
+# Keycloak Configuration
+keycloak.server-url=http://localhost:8080
+keycloak.realm=spring-boot-realm
+keycloak.client-id=spring-boot-client
+keycloak.client-secret=your_client_secret_from_keycloak

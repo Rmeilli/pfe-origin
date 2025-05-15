@@ -1,0 +1,232 @@
+<!--<div class="container mt-4">-->
+<!--  <h4>Validation du fichier CRE pour la structure {{ structureId }}</h4>-->
+<!--  <div *ngIf="message" class="alert alert-info">{{ message }}</div>-->
+
+<!--  <div class="mb-3">-->
+<!--    <input type="file" class="form-control" (change)="onFileSelected($event)">-->
+<!--  </div>-->
+<!--  <button class="btn btn-primary" (click)="validateFile()">Valider le fichier CRE</button>-->
+
+<!--  <div class="mt-3" *ngIf="validationResult">-->
+<!--    <h5>Résultat de la validation :</h5>-->
+<!--    <pre>{{ validationResult | json }}</pre>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--/////////////////////-->
+
+<!--<div class="container mt-4">-->
+<!--  <h5>Validation du fichier CRE</h5>-->
+
+<!--  &lt;!&ndash; Sélection de la structure via un menu déroulant &ndash;&gt;-->
+<!--  <div class="mb-3">-->
+<!--    <label class="form-label">Sélectionnez une structure</label>-->
+<!--    <select class="form-select" [(ngModel)]="selectedStructureId">-->
+<!--      <option *ngFor="let structure of structures" [value]="structure.id">-->
+<!--        {{ structure.nomStructure }} - {{ structure.dateCreation | date:'dd/MM/yyyy' }}-->
+<!--      </option>-->
+<!--    </select>-->
+<!--  </div>-->
+
+<!--  &lt;!&ndash; Sélection du fichier CRE &ndash;&gt;-->
+<!--  <div class="mb-3">-->
+<!--    <label class="form-label">Choisir un fichier CRE</label>-->
+<!--    <input type="file" class="form-control" (change)="onFileSelected($event)">-->
+<!--  </div>-->
+
+<!--  &lt;!&ndash; Bouton de validation &ndash;&gt;-->
+<!--  <button class="btn btn-primary" (click)="validateFile()">Valider le fichier CRE</button>-->
+
+<!--  &lt;!&ndash; Message et résultat de la validation &ndash;&gt;-->
+<!--  <div class="mt-3">-->
+<!--    <p class="text-info">{{ message }}</p>-->
+<!--    <div *ngIf="validationResult">-->
+<!--      <h6>Résultat de la validation :</h6>-->
+<!--      <pre>{{ validationResult | json }}</pre>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--///////////////////////////-->
+<!--<div class="card mt-4">-->
+<!--  <div class="card-body">-->
+<!--    <h5 class="card-title">Gestion et validation des Fichiers CRE pour la structure {{ structureName }}</h5>-->
+
+<!--    &lt;!&ndash; Message global pour les notifications &ndash;&gt;-->
+<!--    <div *ngIf="message" class="alert alert-info">{{ message }}</div>-->
+
+<!--    &lt;!&ndash; En mode modification (edit), on affiche tout : validation, upload, génération... &ndash;&gt;-->
+<!--&lt;!&ndash;    <ng-container *ngIf="mode !== 'view'; else consultOnly">&ndash;&gt;-->
+<!--      &lt;!&ndash; Section de sélection et validation du fichier CRE &ndash;&gt;-->
+<!--      <div class="mb-3">-->
+<!--        <label class="form-label">Choisir un fichier CRE</label>-->
+<!--        <input type="file" class="form-control" (change)="onFileSelected($event)">-->
+<!--      </div>-->
+<!--      <button class="btn btn-primary" (click)="validateFile()">Valider et charger le fichier CRE</button>-->
+
+<!--      &lt;!&ndash; Résultat de validation &ndash;&gt;-->
+<!--      <div class="mt-3" *ngIf="isValidated">-->
+<!--        <h6>Résultat de la validation :</h6>-->
+<!--        &lt;!&ndash; Si le fichier est conforme &ndash;&gt;-->
+<!--        <div *ngIf="validationResult === 'OK'">-->
+<!--          <p class="text-success">Fichier conforme</p>-->
+<!--          <button class="btn btn-success" (click)="uploadFile()">Charger le fichier</button>-->
+<!--          <button class="btn btn-secondary ms-2" (click)="cancel()">Annuler</button>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Si le fichier est invalide (liste d'erreurs) &ndash;&gt;-->
+<!--        <div *ngIf="Array.isArray(validationResult)">-->
+<!--          <p class="text-danger">Fichier invalide</p>-->
+<!--          <ul>-->
+<!--            <li *ngFor="let err of validationResult">{{ err }}</li>-->
+<!--          </ul>-->
+<!--          <button class="btn btn-warning" (click)="uploadFile()">Charger quand même</button>-->
+<!--          <button class="btn btn-secondary ms-2" (click)="cancel()">Annuler</button>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Autre résultat inattendu &ndash;&gt;-->
+<!--        <div *ngIf="validationResult !== 'OK' && !Array.isArray(validationResult)">-->
+<!--          <p>{{ validationMessage }}</p>-->
+<!--          <pre>{{ validationResult | json }}</pre>-->
+<!--          <button class="btn btn-secondary" (click)="cancel()">Annuler</button>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <hr>-->
+<!--      &lt;!&ndash; Bouton pour générer un fichier CRE à partir de la structure &ndash;&gt;-->
+<!--      <button class="btn btn-success mb-2" (click)="generateCreFile()">Générer fichier CRE</button>-->
+<!--&lt;!&ndash;    </ng-container>&ndash;&gt;-->
+
+<!--    &lt;!&ndash; Section commune (listing et téléchargement) : on l'affiche dans tous les cas &ndash;&gt;-->
+<!--    &lt;!&ndash;    <h6>Fichiers CRE déjà chargés :</h6>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <select class="form-select" [(ngModel)]="selectedFileName">&ndash;&gt;-->
+<!--    &lt;!&ndash;      <option *ngFor="let file of availableFiles" [value]="file">{{ file }}</option>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </select>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <button class="btn btn-warning mt-2" (click)="downloadFile()">Télécharger le fichier sélectionné</button>&ndash;&gt;-->
+
+<!--  </div>-->
+<!--</div>-->
+
+<!--//////////////////////////////-->
+
+<div class="card mt-4">
+  <div class="card-body">
+    <h5 class="card-title">
+      Gestions et validation des Fichiers CRE pour la structure {{ structureName }}
+    </h5>
+
+    <!-- Menu déroulant pour sélectionner une structure -->
+    <div class="mb-3">
+      <label class="form-label">Sélectionnez une structure</label>
+      <select class="form-select" [(ngModel)]="selectedStructureId" (change)="onStructureChange()">
+        <option *ngFor="let s of structures" [value]="s.id">
+          {{ s.nomStructure }} - {{ s.dateCreation | date:'dd/MM/yyyy' }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Message global pour les notifications -->
+    <div *ngIf="message" class="alert alert-info">{{ message }}</div>
+
+    <!-- Sélection du fichier CRE -->
+    <div class="mb-3">
+      <label class="form-label">Choisir un fichier CRE</label>
+      <input type="file" class="form-control" (change)="onFileSelected($event)">
+    </div>
+
+    <!-- Bouton de validation -->
+    <button class="btn btn-primary" (click)="validateFile()">Valider et charger fichier CRE</button>
+
+    <!-- Résultat de validation -->
+    <div class="mt-3" *ngIf="validationResult">
+      <h6>Résultat de la validation :</h6>
+      <!-- Si le fichier est conforme -->
+      <div *ngIf="validationResult === 'Fichier conforme' || validationResult === 'OK'">
+        <p class="text-success">{{ validationResult }}</p>
+        <button class="btn btn-success" (click)="uploadFile()">Charger le fichier</button>
+      </div>
+      <!-- Si le fichier est invalide (liste d'erreurs) -->
+      <div *ngIf="Array.isArray(validationResult)">
+        <p class="text-danger">Fichier invalide</p>
+        <ul>
+          <li *ngFor="let err of validationResult">{{ err }}</li>
+        </ul>
+        <button class="btn btn-warning" (click)="uploadFile()">Charger quand même</button>
+      </div>
+      <!-- Autre résultat inattendu -->
+      <div *ngIf="validationResult !== 'Fichier conforme' && validationResult !== 'OK' && !Array.isArray(validationResult)">
+        <p>{{ validationResult }}</p>
+        <pre>{{ validationResult | json }}</pre>
+        <button class="btn btn-warning" (click)="uploadFile()">Charger quand même</button>
+      </div>
+    </div>
+
+    <!-- Bouton d'annulation -->
+    <div class="mt-3">
+      <button class="btn btn-secondary" (click)="cancel()">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!--//////////////////////-->
+
+<div class="card mt-4">
+  <div class="card-body">
+    <h5 class="card-title">
+      Gestion et validation des Fichiers CRE pour la structure {{ structureName }}
+    </h5>
+
+    <!-- Menu déroulant pour sélectionner une structure -->
+    <div class="mb-3">
+      <label class="form-label">Sélectionnez une structure</label>
+      <select class="form-select" [(ngModel)]="selectedStructureId" (change)="onStructureChange()">
+        <option *ngFor="let s of structures" [value]="s.id">
+          {{ s.nomStructure }} - {{ s.dateCreation | date:'dd/MM/yyyy' }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Message global pour les notifications -->
+    <div *ngIf="message" class="alert alert-info">{{ message }}</div>
+
+    <!-- Sélection du fichier CRE -->
+    <div class="mb-3">
+      <label class="form-label">Choisir un fichier CRE</label>
+      <input type="file" class="form-control" (change)="onFileSelected($event)">
+    </div>
+
+    <!-- Bouton de validation -->
+    <button class="btn btn-primary" (click)="validateFile()">Valider et charger fichier CRE</button>
+
+    <!-- Résultat de validation -->
+    <div class="mt-3" *ngIf="validationResult">
+      <h6>Résultat de la validation :</h6>
+      <!-- Si le fichier est conforme -->
+      <div *ngIf="validationResult === 'Fichier conforme' || validationResult === 'OK'">
+        <p class="text-success">{{ validationResult }}</p>
+        <button class="btn btn-success" (click)="uploadFile()">Charger le fichier</button>
+      </div>
+      <!-- Si le fichier est invalide (liste d'erreurs) -->
+      <div *ngIf="Array.isArray(validationResult)">
+        <p class="text-danger">Fichier invalide</p>
+        <ul>
+          <li *ngFor="let err of validationResult">{{ err }}</li>
+        </ul>
+        <button class="btn btn-warning" (click)="uploadFile()">Charger quand même</button>
+      </div>
+      <!-- Autre résultat inattendu -->
+      <div *ngIf="validationResult !== 'Fichier conforme' && validationResult !== 'OK' && !Array.isArray(validationResult)">
+        <p>{{ validationResult }}</p>
+        <pre>{{ validationResult | json }}</pre>
+        <button class="btn btn-warning" (click)="uploadFile()">Charger quand même</button>
+      </div>
+    </div>
+
+    <!-- Bouton d'annulation -->
+    <div class="mt-3">
+      <button class="btn btn-secondary" (click)="cancel()">Annuler</button>
+    </div>
+  </div>
+</div>
+
+
+
+

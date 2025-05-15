@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #ff6600;">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/structures">
+      <img src="assets/BP(image).jpg" alt="Logo" height="30" class="d-inline-block align-text-top me-2">
+      Gestion CRE
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/structures" routerLinkActive="active">Structures</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/import-structure" routerLinkActive="active">Importer Structure</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/cre-file" routerLinkActive="active">Fichiers CRE</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/cre-validation" routerLinkActive="active">Validation CRE</a>
+        </li>
+<!--        <li class="nav-item dropdown">-->
+<!--          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">-->
+<!--            {{ langService.getTranslation('language') }}-->
+<!--          </a>-->
+<!--          <ul class="dropdown-menu">-->
+<!--            <li><a class="dropdown-item" (click)="switchLanguage('fr')">Français</a></li>-->
+<!--            <li><a class="dropdown-item" (click)="switchLanguage('en')">English</a></li>-->
+<!--          </ul>-->
+<!--        </li>-->
+
+        <!-- Modifier les autres liens -->
+<!--        <a class="nav-link" routerLink="/structures">{{ langService.getTranslation('structures') }}</a>-->
+      </ul>
+
+      <!-- User info and logout button -->
+      <div class="d-flex align-items-center" *ngIf="isLoggedIn">
+        <span class="text-white me-3">
+          <i class="bi bi-person-circle me-1"></i>
+          {{ username }}
+        </span>
+        <button class="btn btn-outline-light" (click)="logout()">
+          <i class="bi bi-box-arrow-right me-1"></i>
+          Déconnexion
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

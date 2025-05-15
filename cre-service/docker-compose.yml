@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: gestion_cre_postgres
+    environment:
+      POSTGRES_DB: gestion_cre
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mon_mot_de_passe
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

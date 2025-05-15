@@ -1,0 +1,51 @@
+//src/app/services/champ-cre.service.ts
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ChampCRE } from '../models/champ-cre.model';
+import { environment } from '../../environments/environment';
+import { AuthService } from './auth.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ChampCREService {
+  private apiUrl = `${environment.creApiUrl}/api/valeurs`;
+
+  constructor(private http: HttpClient, private authService: AuthService) {}
+
+  private getHeaders(): HttpHeaders {
+    const token = this.authService.getToken();
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+  }
+
+  // Ajouter un champ à une structure
+  addChamp(structureId: number, champ: ChampCRE): Observable<ChampCRE> {
+    return this.http.post<ChampCRE>(`${this.apiUrl}/structure/${structureId}`, champ, { headers: this.getHeaders() });
+  }
+
+  // Récupérer les champs d'une structure
+  getChampsByStructure(structureId: number): Observable<ChampCRE[]> {
+    return this.http.get<ChampCRE[]>(`${this.apiUrl}/structure/${structureId}`, { headers: this.getHeaders() });
+  }
+
+  // Mettre à jour un champ existant (PUT)
+  updateChamp(champId: number, champ: ChampCRE): Observable<ChampCRE> {
+    return this.http.put<ChampCRE>(`${this.apiUrl}/${champId}`, champ, { headers: this.getHeaders() });
+  }
+
+  // Cette méthode existe déjà et sera utilisée pour sauvegarder les positions mises à jour
+  saveChampsBatch(structureId: number, champs: ChampCRE[]): Observable<ChampCRE[]> {
+    return this.http.post<ChampCRE[]>(`${this.apiUrl}/batch/structure/${structureId}`, champs, { headers: this.getHeaders() });
+  }
+
+  deleteChamp(champId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${champId}`, { headers: this.getHeaders() });
+  }
+
+
+}
+

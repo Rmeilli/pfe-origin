@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: auth-postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: auth_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - auth-network
+
+volumes:
+  postgres_data:
+    name: auth-postgres-data
+
+networks:
+  auth-network:
+    name: auth-network
+    driver: bridge

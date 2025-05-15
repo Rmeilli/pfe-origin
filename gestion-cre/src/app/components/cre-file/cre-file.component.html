@@ -1,0 +1,77 @@
+<!--&lt;!&ndash;cre-file.component.html&ndash;&gt;-->
+
+<!--<div class="container mt-4">-->
+<!--  <h4>Gestion des Fichiers CRE pour la structure {{ structureId }}</h4>-->
+<!--  <div *ngIf="message" class="alert alert-info">{{ message }}</div>-->
+
+<!--  &lt;!&ndash; Upload de fichiers &ndash;&gt;-->
+<!--  <div class="mb-3">-->
+<!--    <label for="creFiles" class="form-label">Sélectionnez des fichiers CRE</label>-->
+<!--    <input type="file" id="creFiles" class="form-control" (change)="onFileSelected($event)" multiple>-->
+<!--  </div>-->
+<!--  <button class="btn btn-primary" (click)="uploadFiles()">Charger fichier CRE</button>-->
+
+<!--  &lt;!&ndash; Liste des fichiers disponibles &ndash;&gt;-->
+<!--  <div class="mt-3">-->
+<!--    <label for="availableFiles" class="form-label">Fichiers disponibles :</label>-->
+<!--    <select id="availableFiles" class="form-select" [(ngModel)]="selectedFile">-->
+<!--      <option *ngFor="let file of availableFiles" [value]="file">-->
+<!--        {{ file }}-->
+<!--      </option>-->
+<!--      <option *ngIf="availableFiles.length === 0" disabled>-->
+<!--        Pas de fichiers disponibles-->
+<!--      </option>-->
+<!--    </select>-->
+<!--    <button class="btn btn-warning mt-2" (click)="downloadFile()">Télécharger le fichier sélectionné</button>-->
+<!--  </div>-->
+
+<!--  &lt;!&ndash; Bouton pour générer un fichier CRE dynamiquement &ndash;&gt;-->
+<!--  <div class="mt-4">-->
+<!--    <button class="btn btn-success" (click)="generateFile()">Générer fichier structure CRE</button>-->
+<!--  </div>-->
+
+<!--</div>-->
+
+<div class="container mt-4">
+  <h4>Gestion des Fichiers CRE</h4>
+
+  <!-- Message global -->
+  <div *ngIf="message" class="alert alert-info">{{ message }}</div>
+
+  <!-- Sélection de la structure -->
+  <div class="mb-3">
+    <label class="form-label">Sélectionnez une structure</label>
+    <select class="form-select" [(ngModel)]="selectedStructureId" (change)="onStructureChange()">
+      <option *ngFor="let s of structures" [value]="s.id">
+        {{ s.nomStructure }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Upload de fichiers -->
+<!--  <div class="mb-3">-->
+<!--    <label for="creFiles" class="form-label">Sélectionnez des fichiers CRE</label>-->
+<!--    <input type="file" id="creFiles" class="form-control" (change)="onFileSelected($event)" multiple>-->
+<!--  </div>-->
+<!--  <button class="btn btn-primary" (click)="uploadFiles()">Charger fichier CRE</button>-->
+
+  <!-- Liste des fichiers disponibles -->
+  <div class="mt-3">
+    <label for="availableFiles" class="form-label">Fichiers disponibles :</label>
+    <select id="availableFiles" class="form-select" [(ngModel)]="selectedFile">
+      <option *ngFor="let file of availableFiles" [value]="file">
+        {{ file }}
+      </option>
+      <option *ngIf="availableFiles.length === 0" disabled>
+        Pas de fichiers disponibles
+      </option>
+    </select>
+    <button class="btn btn-warning mt-2" (click)="downloadFile()">Télécharger le fichier sélectionné</button>
+  </div>
+
+  <!-- Bouton pour générer un fichier CRE dynamiquement -->
+  <div class="mt-4">
+    <button class="btn btn-success" (click)="generateFile()">Générer fichier CRE</button>
+  </div>
+</div>
+

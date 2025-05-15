@@ -1,0 +1,252 @@
+package org.sid.creapp.Entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Entity
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "structure_cre")
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+public class StructureCRE {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNomStructure() {
+        return nomStructure;
+    }
+
+    public void setNomStructure(String nomStructure) {
+        this.nomStructure = nomStructure;
+    }
+
+    public LocalDateTime getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(LocalDateTime dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "nom_structure")
+    private String nomStructure;
+
+    @Column(name = "date_creation")
+    private LocalDateTime dateCreation = LocalDateTime.now();
+
+    //@OneToMany(mappedBy = "structure", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "structure", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<ValeurCRE> valeurs;
+}
+///////////////////////////////////////////////////
+package org.sid.creapp.Entities;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Entity
+@Table(name = "valeurs_cre")
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+public class ValeurCRE {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "structure_id", nullable = false)
+    private StructureCRE structure;
+
+    private int ligne;
+    private int ord;
+
+    @Column(name = "nom_zone")
+    private String nomZone;
+
+    private int pos;
+
+    @Column(name = "long_col")  // Vérifie que la colonne en base est bien "longCol"
+    private int longCol;
+
+    private int dec;
+
+    @Column(name = "format")
+    private String format;
+
+    @Column(name = "designation_bcp")
+    private String designationBcp;
+}
+////////////////////////////////////////////////////////:
+package org.sid.creapp.Controllers;
+
+
+import org.sid.creapp.Entities.StructureCRE;
+import org.sid.creapp.repositories.StructureCRERepository;
+import org.sid.creapp.services.StructureCREService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/structures")
+public class StructureCREController {
+    private final StructureCRERepository structureCRERepository;
+    private final StructureCREService structureCREService;
+
+    public StructureCREController(StructureCRERepository structureCRERepository, StructureCREService structureCREService) {
+        this.structureCRERepository = structureCRERepository;
+        this.structureCREService = structureCREService;
+    }
+
+    @GetMapping
+    public List<StructureCRE> getAllStructures() {
+        System.out.println(structureCRERepository.findAll());
+        return structureCREService.getAllStructures();
+    }
+
+    @PostMapping
+    public StructureCRE createStructure(@RequestBody StructureCRE structureCRE) {
+        return structureCREService.saveStructure(structureCRE);
+    }
+}
+//////////////////////////////////////////////////
+package org.sid.creapp.Controllers;
+
+import org.sid.creapp.Entities.ValeurCRE;
+import org.sid.creapp.services.ValeurCREService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/valeurs")
+public class ValeurCREController {
+    private final ValeurCREService valeurCREService;
+
+
+    public ValeurCREController(ValeurCREService valeurCREService) {
+        this.valeurCREService = valeurCREService;
+    }
+
+    @GetMapping("/structure/{structureId}")
+    public List<ValeurCRE> getValeursByStructure(@PathVariable Long structureId) {
+        return valeurCREService.getValeursByStructure(structureId);
+    }
+
+    @PostMapping("/batch")
+    public ResponseEntity<List<ValeurCRE>> addValeurs(@RequestBody List<ValeurCRE> valeurs) {
+        List<ValeurCRE> savedValeurs = valeurCREService.saveAllValeurs(valeurs);
+        return ResponseEntity.ok(savedValeurs);
+    }
+}
+
+/////////////////////////////////////////////////////////////////
+package org.sid.creapp.repositories;
+
+import org.sid.creapp.Entities.StructureCRE;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface StructureCRERepository extends JpaRepository<StructureCRE, Long> {
+    List<StructureCRE> findAll();
+
+
+}
+/////////////////////////////////////////
+package org.sid.creapp.repositories;
+
+import org.sid.creapp.Entities.ValeurCRE;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface ValeurCRERepository extends JpaRepository<ValeurCRE, Long> {
+    List<ValeurCRE> findByStructureId(Long structureId);
+}
+//////////////////////////////////////
+package org.sid.creapp.services;
+
+import org.sid.creapp.Entities.StructureCRE;
+import org.sid.creapp.repositories.StructureCRERepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class StructureCREService {
+    private final StructureCRERepository structureCRERepository;
+
+    public StructureCREService(StructureCRERepository structureCRERepository) {
+        this.structureCRERepository = structureCRERepository;
+    }
+
+    public List<StructureCRE> getAllStructures() {
+        return structureCRERepository.findAll();
+    }
+
+    public Optional<StructureCRE> getStructureById(Long id) {
+        return structureCRERepository.findById(id);
+    }
+
+    public StructureCRE saveStructure(StructureCRE structureCRE) {
+        return structureCRERepository.save(structureCRE);
+    }
+}
+////////////////////////////////////////////
+package org.sid.creapp.services;
+
+import org.sid.creapp.Entities.ValeurCRE;
+import org.sid.creapp.repositories.ValeurCRERepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+public class ValeurCREService {
+    @Autowired
+    private final ValeurCRERepository valeurCRERepository;
+
+    public ValeurCREService(ValeurCRERepository valeurCRERepository) {
+        this.valeurCRERepository = valeurCRERepository;
+    }
+
+    public List<ValeurCRE> getValeursByStructure(Long structureId) {
+        return valeurCRERepository.findByStructureId(structureId);
+    }
+
+   // @Transactional  // Assure que toutes les valeurs sont insérées ou aucune
+    public List<ValeurCRE> saveAllValeurs(List<ValeurCRE> valeurs) {
+        return valeurCRERepository.saveAll(valeurs);
+    }
+}

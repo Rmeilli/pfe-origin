@@ -1,0 +1,18 @@
+# Configuration OAuth2 et sécurité uniquement
+# Les autres configurations sont dans application.properties
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/bp-realm
+          jwk-set-uri: http://localhost:8080/realms/bp-realm/protocol/openid-connect/certs
+
+# Configuration des logs
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.sid.creapp: DEBUG

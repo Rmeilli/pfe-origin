@@ -1,0 +1,88 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        # Route pour le service CRE avec plusieurs paths
+        - id: cre-service
+          uri: lb://CREAPP
+          predicates:
+            - Path=/api/valeurs/**,/api/cre/structures/**,/api/cre/crefiles/**
+          filters:
+            - RewritePath=/api/cre/(?<segment>.*), /api/$\{segment}
+            - name: CircuitBreaker
+              args:
+                name: creServiceCircuitBreaker
+                fallbackUri: forward:/fallback/cre
+        
+        # Route pour le service d'authentification
+        - id: auth-service
+          uri: lb://AUTH-SERVICE  # Updated to match the exact name in Eureka
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - StripPrefix=1
+            - name: CircuitBreaker
+              args:
+                name: authServiceCircuitBreaker
+                fallbackUri: forward:/fallback/auth
+
+        # Route pour l'application Angular (si nécessaire)
+        - id: frontend
+          uri: http://localhost:4200
+          predicates:
+            - Path=/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: frontendCircuitBreaker
+                fallbackUri: forward:/fallback/frontend
+
+  # Configuration OAuth2 et sécurité
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/auth-service
+          jwk-set-uri: http://localhost:8080/realms/auth-service/protocol/openid-connect/certs
+
+# Configuration Resilience4j pour les Circuit Breakers
+resilience4j:
+  circuitbreaker:
+    instances:
+      authServiceCircuitBreaker:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
+      creServiceCircuitBreaker:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
+      frontendCircuitBreaker:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 5s
+        failureRateThreshold: 50
+
+# Configuration des logs
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.security: DEBUG
+    reactor.netty: INFO
+    org.springframework.web: DEBUG

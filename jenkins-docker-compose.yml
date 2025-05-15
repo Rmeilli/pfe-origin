@@ -1,0 +1,24 @@
+version: '3'
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    ports:
+      - "7080:8080"  # Port principal de Jenkins (modifié pour éviter les conflits avec vos autres services)
+      - "50000:50000"  # Port pour les agents Jenkins
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock  # Pour permettre à Jenkins d'utiliser Docker
+      - C:/Users/User/Downloads/ProjetBp_micro_services:/var/jenkins_project  # Monter le dossier du projet
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false  # Désactive l'assistant d'installation
+    restart: always
+    networks:
+      - bp-network
+
+networks:
+  bp-network:
+    driver: bridge
+
+volumes:
+  jenkins_home:

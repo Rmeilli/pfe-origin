@@ -1,0 +1,35 @@
+First struct test
+ABBGG 1 4 0 Texte 9010 par défaut
+APPLID 5 2 0 Texte TI par défaut
+SOUS_CODE 7 3 0 Texte CRE par défaut
+DTINV 10 6 0 Texte Date système inversée (format aammjj)
+NOSEQ 16 5 0 Numérique Compteur séquentiel par fichier
+CRE_VER 21 1 0 Texte 1 blanc
+ABBGG1 22 4 0 Texte Domiciliation du compte
+FILLER1 26 6 0 Texte 6 blancs
+CPTE1 32 16 0 Numérique compte du client
+FILLER2 48 2 0 Texte 2 blancs
+ABBGG2 50 4 0 Texte 
+FILLER3 54 6 0 Texte 6 blancs
+CPTE2 60 16 0 Numérique credoc import délivré par la banque fav client 81511
+FILLER4 76 2 0 Texte 2 blancs
+CR_COOPER 78 5 0 Texte OUCDI
+DATE1 83 6 0 Datetime date d'opération
+DATE2 89 6 0 Datetime Date de valeur
+FILLER5 95 3 0 Texte plural du compte 21442
+LIBC1 98 6 0 Texte Numéro de référence de l'opération
+FILLER6 104 12 0 Texte 13 blancs
+TYPE CLI 116 1 0 Texte 13 blancs
+MT10 117 15 2 Décimale montant de la provision
+MT11 132 15 2 Décimale montant du credoc en dh
+MT12 147 11 2 Décimale montant de credoc en dev
+MT13 158 11 2 Décimale montant des frais 
+MT22 169 11 2 Décimale montant des commissions 
+MTAXE 180 11 2 Décimale montant de la tva sur frais 
+COURS 191 9 2 Décimale 9 blancs
+DEVISE 200 3 0 Texte Code de la devise 
+CODE_C 203 4 0 Numérique 4 blancs
+MTGC 207 11 2 Numérique 11 blancs
+MTPC 218 11 2 Numérique 11 blancs
+TVAGC 229 11 2 Numérique 11 blancs
+FILER7 240 60 0 Texte 60 blancs

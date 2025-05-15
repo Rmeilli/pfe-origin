@@ -1,0 +1,688 @@
+// import { Component, Input } from '@angular/core';
+// import { CreFileService } from '../../services/cre-file.service';
+//
+// @Component({
+//   selector: 'app-cre-file-flow',
+//   templateUrl: './cre-file-flow.component.html',
+//   styleUrls: ['./cre-file-flow.component.css']
+// })
+// export class CreFileFlowComponent {
+//   @Input() structureId!: number;
+//   selectedFile!: File;
+//   validationResult: any = null;  // Peut être "OK" ou un tableau d'erreurs
+//   validationMessage: string = '';
+//   isValidated: boolean = false;  // Indique si on a fait la validation
+//
+//   message: string = '';          // Message global
+//
+//   constructor(private creFileService: CreFileService) {}
+//
+//   onFileSelected(event: any): void {
+//     this.selectedFile = event.target.files[0];
+//     this.isValidated = false;     // On réinitialise l’état de validation
+//     this.validationResult = null;
+//     this.validationMessage = '';
+//     this.message = '';
+//   }
+//
+//   // Etape 1 : Valider le fichier
+//   validateFile(): void {
+//     if (!this.selectedFile) {
+//       this.message = "Veuillez sélectionner un fichier CRE.";
+//       return;
+//     }
+//     this.creFileService.validateCreFile(this.structureId, this.selectedFile).subscribe({
+//       next: (res) => {
+//         this.isValidated = true;
+//         if (typeof res === 'string' && res === 'Fichier conforme') {
+//           // Le backend a renvoyé "Fichier conforme"
+//           this.validationResult = 'OK';
+//           this.validationMessage = "Fichier conforme";
+//         } else if (Array.isArray(res)) {
+//           // Le backend a renvoyé une liste d'erreurs
+//           this.validationResult = res;  // On stocke le tableau d'erreurs
+//           this.validationMessage = "Fichier invalide";
+//         } else {
+//           // Cas inattendu, on l'affiche tel quel
+//           this.validationResult = res;
+//           this.validationMessage = "Réponse inattendue du serveur";
+//         }
+//       },
+//       error: (err) => {
+//         console.error("Erreur lors de la validation:", err);
+//         this.message = "Erreur lors de la validation du fichier.";
+//       }
+//     });
+//   }
+//
+//   // Etape 2 : Charger le fichier (même si valide ou non)
+//   uploadFile(): void {
+//     if (!this.selectedFile) {
+//       this.message = "Aucun fichier sélectionné.";
+//       return;
+//     }
+//     this.creFileService.uploadFiles(this.structureId, [this.selectedFile]).subscribe({
+//       next: (res) => {
+//         this.message = "Fichier chargé avec succès.";
+//       },
+//       error: (err) => {
+//         console.error("Erreur lors du chargement:", err);
+//         this.message = "Erreur lors du chargement du fichier.";
+//       }
+//     });
+//   }
+//
+//   // Permet d'annuler et de réinitialiser l'état
+//   cancel(): void {
+//     this.selectedFile = undefined as any;
+//     this.isValidated = false;
+//     this.validationResult = null;
+//     this.validationMessage = '';
+//     this.message = '';
+//   }
+//
+//   protected readonly Array = Array;
+// }
+
+////////////////////////////////////////////////////////////
+
+// import { Component, Input, OnInit } from '@angular/core';
+// import { CreFileService } from '../../services/cre-file.service';
+// import { Observable } from 'rxjs';
+//
+// @Component({
+//   selector: 'app-cre-file-flow',
+//   templateUrl: './cre-file-flow.component.html',
+//   styleUrls: ['./cre-file-flow.component.css']
+// })
+// export class CreFileFlowComponent implements OnInit {
+//   @Input() structureId!: number;
+//
+//   // Fichier sélectionné pour l'import
+//   selectedFile!: File;
+//   // Liste des fichiers déjà chargés pour la structure
+//   availableFiles: string[] = [];
+//   // Nom du fichier sélectionné pour téléchargement
+//   selectedFileName: string = '';
+//
+//   // Pour la validation
+//   isValidated: boolean = false;
+//   validationResult: any = null; // "OK" ou tableau d'erreurs
+//   validationMessage: string = '';
+//
+//   // Message global d'information ou d'erreur
+//   message: string = '';
+//
+//   constructor(private creFileService: CreFileService) {}
+//
+//   ngOnInit(): void {
+//     if (this.structureId) {
+//       this.loadAvailableFiles();
+//     }
+//   }
+//
+//   // Sélection d'un fichier CRE via l'input file
+//   onFileSelected(event: any): void {
+//     this.selectedFile = event.target.files[0];
+//     this.isValidated = false;
+//     this.validationResult = null;
+//     this.validationMessage = '';
+//     this.message = '';
+//   }
+//
+//   // Validation du fichier CRE en appelant l'endpoint dédié
+//   validateFile(): void {
+//     if (!this.selectedFile) {
+//       this.message = "Veuillez sélectionner un fichier CRE.";
+//       return;
+//     }
+//     this.creFileService.validateCreFile(this.structureId, this.selectedFile).subscribe({
+//       next: (res) => {
+//         this.isValidated = true;
+//         if (typeof res === 'string' && res === 'Fichier conforme') {
+//           this.validationResult = 'OK';
+//           this.validationMessage = "Fichier conforme";
+//         } else if (Array.isArray(res)) {
+//           this.validationResult = res;
+//           this.validationMessage = "Fichier invalide";
+//         } else {
+//           this.validationResult = res;
+//           this.validationMessage = "Réponse inattendue du serveur";
+//         }
+//       },
+//       error: (err) => {
+//         console.error("Erreur lors de la validation:", err);
+//         this.message = "Erreur lors de la validation du fichier.";
+//       }
+//     });
+//   }
+//
+//   // Upload (chargement) du fichier CRE sur le backend
+//   uploadFile(): void {
+//     if (!this.selectedFile) {
+//       this.message = "Aucun fichier sélectionné.";
+//       return;
+//     }
+//     this.creFileService.uploadFiles(this.structureId, [this.selectedFile]).subscribe({
+//       next: (res) => {
+//         this.message = "Fichier chargé avec succès.";
+//         this.loadAvailableFiles();
+//       },
+//       error: (err) => {
+//         console.error("Erreur lors du chargement:", err);
+//         this.message = "Erreur lors du chargement du fichier.";
+//       }
+//     });
+//   }
+//
+//   // Récupérer la liste des fichiers déjà chargés pour la structure
+//   loadAvailableFiles(): void {
+//     this.creFileService.listFiles(this.structureId).subscribe({
+//       next: (files) => {
+//         this.availableFiles = files;
+//         if (files.length > 0) {
+//           this.selectedFileName = files[0];
+//         }
+//       },
+//       error: (err) => {
+//         console.error("Erreur lors du chargement des fichiers disponibles:", err);
+//       }
+//     });
+//   }
+//
+//   // Téléchargement du fichier sélectionné
+//   // downloadFile(): void {
+//   //   if (!this.selectedFileName) {
+//   //     this.message = "Veuillez sélectionner un fichier à télécharger.";
+//   //     return;
+//   //   }
+//   //   this.creFileService.downloadUploadedFile(this.selectedFileName,this.structureId).subscribe({
+//   //     next: (blob) => {
+//   //       const url = window.URL.createObjectURL(blob);
+//   //       const a = document.createElement('a');
+//   //       a.href = url;
+//   //       a.download = this.selectedFileName;
+//   //       a.click();
+//   //       window.URL.revokeObjectURL(url);
+//   //     },
+//   //     error: (err) => {
+//   //       console.error("Erreur lors du téléchargement", err);
+//   //       this.message = "Erreur lors du téléchargement du fichier.";
+//   //     }
+//   //   });
+//   // }
+//
+//   downloadFile(): void {
+//     if (!this.selectedFileName) {
+//       this.message = "Veuillez sélectionner un fichier à télécharger.";
+//       return;
+//     }
+//     this.creFileService.downloadUploadedFile(this.structureId, this.selectedFileName).subscribe({
+//       next: (blob) => {
+//         const url = window.URL.createObjectURL(blob);
+//         const a = document.createElement('a');
+//         a.href = url;
+//         a.download = this.selectedFileName;
+//         a.click();
+//         window.URL.revokeObjectURL(url);
+//       },
+//       error: (err) => {
+//         console.error("Erreur lors du téléchargement", err);
+//         this.message = "Erreur lors du téléchargement du fichier.";
+//       }
+//     });
+//   }
+//
+//   // Génération d'un fichier CRE à partir de la structure
+//   generateCreFile(): void {
+//     if (!this.structureId) {
+//       this.message = "Sélectionnez une structure.";
+//       return;
+//     }
+//     this.creFileService.generateCreFile(this.structureId).subscribe({
+//       next: (blob) => {
+//         const url = window.URL.createObjectURL(blob);
+//         const a = document.createElement('a');
+//         a.href = url;
+//         a.download = `CRE_structure_${this.structureId}.txt`;
+//         a.click();
+//         window.URL.revokeObjectURL(url);
+//       },
+//       error: (err) => {
+//         console.error("Erreur lors de la génération du fichier CRE", err);
+//         this.message = "Erreur lors de la génération du fichier CRE.";
+//       }
+//     });
+//   }
+//
+//   // Annuler l'opération de validation ou d'upload
+//   cancel(): void {
+//     this.selectedFile = undefined as any;
+//     this.isValidated = false;
+//     this.validationResult = null;
+//     this.validationMessage = '';
+//     this.message = '';
+//   }
+//
+//   protected readonly Array = Array;
+// }
+
+///////////////////////////
+
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { CreFileService } from '../../services/cre-file.service';
+import { ChangeDetectorRef } from '@angular/core';
+
+@Component({
+  selector: 'app-cre-file-flow',
+  templateUrl: './cre-file-flow.component.html',
+  styleUrls: ['./cre-file-flow.component.css']
+})
+export class CreFileFlowComponent implements OnInit, OnChanges {
+  @Input() structureId!: number;
+  @Input() structureName: string = '';// Assurez-vous de passer ce paramètre depuis le parent
+  @Input() mode: 'view' | 'edit' | null = 'edit';
+
+
+
+  // Pour l'upload du fichier CRE
+  selectedFile!: File;
+  // Pour la liste des fichiers disponibles déjà chargés
+  availableFiles: string[] = [];
+  selectedFileName: string = '';
+
+  // Pour la validation
+  isValidated: boolean = false;
+  validationResult: any = null; // "OK" ou tableau d'erreurs
+  validationMessage: string = '';
+
+  // Message global
+  message: string = '';
+
+  constructor(private creFileService: CreFileService, private cd: ChangeDetectorRef, ) {}
+
+  ngOnInit(): void {
+    if (this.structureId) {
+      this.loadAvailableFiles();
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['structureId'] && !changes['structureId'].isFirstChange()) {
+      this.loadAvailableFiles();
+    }
+  }
+
+  // Sélection du fichier CRE
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+    this.resetValidation();
+  }
+
+  private resetValidation(): void {
+    this.isValidated = false;
+    this.validationResult = null;
+    this.validationMessage = '';
+    this.message = '';
+  }
+
+  // Valider le fichier CRE
+  validateFile(): void {
+    if (!this.selectedFile) {
+      this.message = "Veuillez sélectionner un fichier CRE.";
+      return;
+    }
+    this.creFileService.validateCreFile(this.structureId, this.selectedFile).subscribe({
+      next: (res) => {
+        this.isValidated = true;
+        if (typeof res === 'string' && res === 'Fichier conforme') {
+          this.validationResult = 'OK';
+          this.validationMessage = "Fichier conforme";
+        } else if (Array.isArray(res)) {
+          this.validationResult = res;
+          this.validationMessage = "Fichier invalide";
+        } else {
+          this.validationResult = res;
+          this.validationMessage = "Réponse inattendue du serveur";
+        }
+        // Déclenche la détection des changements
+        this.cd.detectChanges();
+      },
+      error: (err) => {
+        console.error("Erreur lors de la validation:", err);
+        this.message = "Erreur lors de la validation du fichier.";
+      }
+    });
+  }
+
+  // Upload (chargement) du fichier CRE
+  // uploadFile(): void {
+  //   if (!this.selectedFile) {
+  //     this.message = "Aucun fichier sélectionné.";
+  //     return;
+  //   }
+  //   this.creFileService.uploadFiles(this.structureId, [this.selectedFile]).subscribe({
+  //     next: (res) => {
+  //       this.message = "Fichier chargé avec succès.";
+  //       this.loadAvailableFiles(); // Rafraîchir la liste automatiquement
+  //     },
+  //     error: (err) => {
+  //       console.error("Erreur lors du chargement:", err);
+  //       this.message = "Erreur lors du chargement du fichier.";
+  //     }
+  //   });
+  // }
+
+  uploadFile(): void {
+    if (!this.selectedFile) {
+      this.message = "Aucun fichier sélectionné.";
+      return;
+    }
+
+    // Vérifier si le fichier existe déjà
+    const existingFileName = this.availableFiles.find(file => file === this.selectedFile.name);
+    if (existingFileName) {
+      this.message = "Le fichier existe déjà.";
+      return;
+    }
+
+    this.creFileService.uploadFiles(this.structureId, [this.selectedFile]).subscribe({
+      next: (res) => {
+        this.message = "Fichier chargé avec succès.";
+        this.loadAvailableFiles(); // Rafraîchir la liste automatiquement
+      },
+      error: (err) => {
+        console.error("Erreur lors du chargement:", err);
+        this.message = "Erreur lors du chargement du fichier.";
+      }
+    });
+  }
+  // Récupérer la liste des fichiers disponibles
+  loadAvailableFiles(): void {
+    this.creFileService.listFiles(this.structureId).subscribe({
+      next: (files) => {
+        this.availableFiles = files;
+        if (files.length > 0) {
+          this.selectedFileName = files[0];
+        }
+        // Déclencher la détection des changements
+        this.cd.detectChanges();
+      },
+      error: (err) => {
+        console.error("Erreur lors du chargement des fichiers disponibles:", err);
+      }
+    });
+  }
+
+  // Télécharger le fichier sélectionné
+  downloadFile(): void {
+    if (!this.selectedFileName) {
+      this.message = "Veuillez sélectionner un fichier à télécharger.";
+      return;
+    }
+    this.creFileService.downloadUploadedFile(this.structureId, this.selectedFileName).subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = this.selectedFileName;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        console.error("Erreur lors du téléchargement", err);
+        this.message = "Erreur lors du téléchargement du fichier.";
+      }
+    });
+  }
+
+  // Générer un fichier CRE à partir de la structure
+  generateCreFile(): void {
+    if (!this.structureId) {
+      this.message = "Sélectionnez une structure.";
+      return;
+    }
+    this.creFileService.generateCreFile(this.structureId).subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `CRE_structure_${this.structureName}.txt`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        console.error("Erreur lors de la génération du fichier CRE", err);
+        this.message = "Erreur lors de la génération du fichier CRE.";
+      }
+    });
+  }
+
+  // Annuler l'opération de validation ou d'upload
+  cancel(): void {
+    this.resetValidation();
+    this.selectedFile = undefined as any;
+  }
+
+  protected readonly Array = Array;
+}
+// ////////////////////
+
+// import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+// import { CreFileService } from '../../services/cre-file.service';
+// import { ChangeDetectorRef } from '@angular/core';
+// import { StructureCREService } from '../../services/structure-cre.service';
+// import {StructureCRE} from "../../models/structure-cre.model";
+//
+//
+// @Component({
+//   selector: 'app-cre-file-flow',
+//   templateUrl: './cre-file-flow.component.html',
+//   styleUrls: ['./cre-file-flow.component.css']
+// })
+// export class CreFileFlowComponent implements OnInit, OnChanges {
+//   structures: StructureCRE[] = [];
+//   @Input() structureId!: number;
+//   selectedStructureId!: number;  // L’ID de la structure choisie
+//   @Input() structureName: string = '';// Assurez-vous de passer ce paramètre depuis le parent
+//   @Input() mode: 'view' | 'edit' | null = 'edit';
+//
+//
+//
+//   // Pour l'upload du fichier CRE
+//   selectedFile!: File;
+//   // Pour la liste des fichiers disponibles déjà chargés
+//   availableFiles: string[] = [];
+//   selectedFileName: string = '';
+//
+//   // Pour la validation
+//   isValidated: boolean = false;
+//   validationResult: any = null; // "OK" ou tableau d'erreurs
+//   validationMessage: string = '';
+//
+//   // Message global
+//   message: string = '';
+//
+//   constructor(private creFileService: CreFileService, private cd: ChangeDetectorRef, private structureCREService: StructureCREService,
+//   ) {}
+//
+//   ngOnInit(): void {
+//     if (this.structureId) {
+//       this.loadAvailableFiles();
+//     }
+//     this.structureCREService.getStructures().subscribe({
+//       next: (data) => {
+//         this.structures = data;
+//         // Optionnel : pré-sélectionner la première
+//         if (this.structures.length > 0) {
+//           this.selectedStructureId = this.structures[0].id;
+//         }
+//       },
+//       error: (err) => {
+//         console.error("Erreur lors du chargement des structures", err);
+//       }
+//     });
+//   }
+//
+//   ngOnChanges(changes: SimpleChanges): void {
+//     if (changes['structureId'] && !changes['structureId'].isFirstChange()) {
+//       this.loadAvailableFiles();
+//     }
+//   }
+//
+//   // Sélection du fichier CRE
+//   onFileSelected(event: any): void {
+//     this.selectedFile = event.target.files[0];
+//     this.resetValidation();
+//   }
+//
+//   private resetValidation(): void {
+//     this.isValidated = false;
+//     this.validationResult = null;
+//     this.validationMessage = '';
+//     this.message = '';
+//   }
+//
+//   // Valider le fichier CRE
+//   validateFile(): void {
+//     if (!this.selectedFile) {
+//       this.message = "Veuillez sélectionner un fichier CRE.";
+//       return;
+//     }
+//     this.creFileService.validateCreFile(this.structureId, this.selectedFile).subscribe({
+//       next: (res) => {
+//         this.isValidated = true;
+//         if (typeof res === 'string' && res === 'Fichier conforme') {
+//           this.validationResult = 'OK';
+//           this.validationMessage = "Fichier conforme";
+//         } else if (Array.isArray(res)) {
+//           this.validationResult = res;
+//           this.validationMessage = "Fichier invalide";
+//         } else {
+//           this.validationResult = res;
+//           this.validationMessage = "Réponse inattendue du serveur";
+//         }
+//         // Déclenche la détection des changements
+//         this.cd.detectChanges();
+//       },
+//       error: (err) => {
+//         console.error("Erreur lors de la validation:", err);
+//         this.message = "Erreur lors de la validation du fichier.";
+//       }
+//     });
+//   }
+//
+//   // Upload (chargement) du fichier CRE
+//   // uploadFile(): void {
+//   //   if (!this.selectedFile) {
+//   //     this.message = "Aucun fichier sélectionné.";
+//   //     return;
+//   //   }
+//   //   this.creFileService.uploadFiles(this.structureId, [this.selectedFile]).subscribe({
+//   //     next: (res) => {
+//   //       this.message = "Fichier chargé avec succès.";
+//   //       this.loadAvailableFiles(); // Rafraîchir la liste automatiquement
+//   //     },
+//   //     error: (err) => {
+//   //       console.error("Erreur lors du chargement:", err);
+//   //       this.message = "Erreur lors du chargement du fichier.";
+//   //     }
+//   //   });
+//   // }
+//
+//   uploadFile(): void {
+//     if (!this.selectedFile) {
+//       this.message = "Aucun fichier sélectionné.";
+//       return;
+//     }
+//
+//     // Vérifier si le fichier existe déjà
+//     const existingFileName = this.availableFiles.find(file => file === this.selectedFile.name);
+//     if (existingFileName) {
+//       this.message = "Le fichier existe déjà.";
+//       return;
+//     }
+//
+//     this.creFileService.uploadFiles(this.structureId, [this.selectedFile]).subscribe({
+//       next: (res) => {
+//         this.message = "Fichier chargé avec succès.";
+//         this.loadAvailableFiles(); // Rafraîchir la liste automatiquement
+//       },
+//       error: (err) => {
+//         console.error("Erreur lors du chargement:", err);
+//         this.message = "Erreur lors du chargement du fichier.";
+//       }
+//     });
+//   }
+//   // Récupérer la liste des fichiers disponibles
+//   loadAvailableFiles(): void {
+//     this.creFileService.listFiles(this.structureId).subscribe({
+//       next: (files) => {
+//         this.availableFiles = files;
+//         if (files.length > 0) {
+//           this.selectedFileName = files[0];
+//         }
+//         // Déclencher la détection des changements
+//         this.cd.detectChanges();
+//       },
+//       error: (err) => {
+//         console.error("Erreur lors du chargement des fichiers disponibles:", err);
+//       }
+//     });
+//   }
+//
+//   // Télécharger le fichier sélectionné
+//   downloadFile(): void {
+//     if (!this.selectedFileName) {
+//       this.message = "Veuillez sélectionner un fichier à télécharger.";
+//       return;
+//     }
+//     this.creFileService.downloadUploadedFile(this.structureId, this.selectedFileName).subscribe({
+//       next: (blob) => {
+//         const url = window.URL.createObjectURL(blob);
+//         const a = document.createElement('a');
+//         a.href = url;
+//         a.download = this.selectedFileName;
+//         a.click();
+//         window.URL.revokeObjectURL(url);
+//       },
+//       error: (err) => {
+//         console.error("Erreur lors du téléchargement", err);
+//         this.message = "Erreur lors du téléchargement du fichier.";
+//       }
+//     });
+//   }
+//
+//   // Générer un fichier CRE à partir de la structure
+//   generateCreFile(): void {
+//     if (!this.structureId) {
+//       this.message = "Sélectionnez une structure.";
+//       return;
+//     }
+//     this.creFileService.generateCreFile(this.structureId).subscribe({
+//       next: (blob) => {
+//         const url = window.URL.createObjectURL(blob);
+//         const a = document.createElement('a');
+//         a.href = url;
+//         a.download = `CRE_structure_${this.structureName}.txt`;
+//         a.click();
+//         window.URL.revokeObjectURL(url);
+//       },
+//       error: (err) => {
+//         console.error("Erreur lors de la génération du fichier CRE", err);
+//         this.message = "Erreur lors de la génération du fichier CRE.";
+//       }
+//     });
+//   }
+//
+//   // Annuler l'opération de validation ou d'upload
+//   cancel(): void {
+//     this.resetValidation();
+//     this.selectedFile = undefined as any;
+//   }
+//
+//   protected readonly Array = Array;
+// }
+
+
+

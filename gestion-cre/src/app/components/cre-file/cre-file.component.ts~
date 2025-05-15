@@ -1,0 +1,434 @@
+// // // cre-file.component.ts
+//
+// import { Component, Input, OnInit } from '@angular/core';
+// import { CreFileService } from '../../services/cre-file.service';
+//
+// @Component({
+//   selector: 'app-cre-file',
+//   templateUrl: './cre-file.component.html',
+//   styleUrls: ['./cre-file.component.css']
+// })
+// export class CreFileComponent implements OnInit {
+//   @Input() structureId!: number;
+//   availableFiles: string[] = [];
+//   selectedFile: string = '';
+//
+//   selectedFiles: File[] = [];
+//   message: string = '';
+//
+//   constructor(private creFileService: CreFileService) {}
+//
+//   ngOnInit(): void {
+//     if (this.structureId) {
+//       this.loadAvailableFiles();
+//     }
+//   }
+//
+//   loadAvailableFiles(): void {
+//     this.creFileService.listFiles(this.structureId).subscribe(
+//       (files) => {
+//         this.availableFiles = files;
+//         if (files.length > 0) {
+//           this.selectedFile = files[0];
+//         } else {
+//           this.selectedFile = '';
+//         }
+//       },
+//       (error) => {
+//         console.error("Erreur lors du chargement des fichiers disponibles", error);
+//       }
+//     );
+//   }
+//
+//   onFileSelected(event: any): void {
+//     this.selectedFiles = Array.from(event.target.files);
+//   }
+//
+//   uploadFiles(): void {
+//     if (!this.structureId || this.selectedFiles.length === 0) {
+//       this.message = "Sélectionnez au moins un fichier et vérifiez la structure.";
+//       return;
+//     }
+//     this.creFileService.uploadFiles(this.structureId, this.selectedFiles).subscribe(
+//       res => {
+//         this.message = "Fichiers chargés avec succès.";
+//         this.selectedFiles = [];
+//         this.loadAvailableFiles();
+//       },
+//       err => {
+//         console.error(err);
+//         this.message = "Erreur lors du chargement des fichiers.";
+//       }
+//     );
+//   }
+//
+//   downloadFile(): void {
+//     if (!this.selectedFile) {
+//       this.message = "Veuillez sélectionner un fichier à télécharger.";
+//       return;
+//     }
+//     this.creFileService.downloadUploadedFile(this.structureId, this.selectedFile).subscribe(
+//       blob => {
+//         const url = window.URL.createObjectURL(blob);
+//         const a = document.createElement('a');
+//         a.href = url;
+//         a.download = this.selectedFile;
+//         a.click();
+//         window.URL.revokeObjectURL(url);
+//       },
+//       err => {
+//         console.error("Erreur lors du téléchargement", err);
+//         this.message = "Erreur lors du téléchargement du fichier.";
+//       }
+//     );
+//   }
+//
+//   generateFile(): void {
+//     if (!this.structureId) {
+//       this.message = "Sélectionnez une structure.";
+//       return;
+//     }
+//     this.creFileService.generateCreFile(this.structureId).subscribe(
+//       blob => {
+//         const url = window.URL.createObjectURL(blob);
+//         const a = document.createElement('a');
+//         a.href = url;
+//         a.download = `CRE_structure_${this.structureId}.txt`;
+//         a.click();
+//         window.URL.revokeObjectURL(url);
+//       },
+//       err => {
+//         console.error(err);
+//         this.message = "Erreur lors de la génération du fichier CRE.";
+//       }
+//     );
+//   }
+// }
+//
+
+// import { Component, Input, OnInit } from '@angular/core';
+// import { ChangeDetectorRef } from '@angular/core';
+// import { CreFileService } from '../../services/cre-file.service';
+//
+// @Component({
+//   selector: 'app-cre-file',
+//   templateUrl: './cre-file.component.html',
+//   styleUrls: ['./cre-file.component.css']
+// })
+// export class CreFileComponent implements OnInit {
+//   // Utilisation d'un setter pour détecter tout changement de structureId
+//   private _structureId!: number;
+//   @Input() set structureId(value: number) {
+//     if (value !== this._structureId) {
+//       this._structureId = value;
+//       this.loadAvailableFiles(); // Recharge la liste dès que structureId change
+//     }
+//   }
+//   get structureId(): number {
+//     return this._structureId;
+//   }
+//
+//   availableFiles: string[] = [];
+//   selectedFile: string = '';
+//   selectedFiles: File[] = [];
+//   message: string = '';
+//
+//   constructor(private creFileService: CreFileService, private cdRef: ChangeDetectorRef) {}
+//
+//   ngOnInit(): void {
+//     if (this.structureId) {
+//       this.loadAvailableFiles();
+//     }
+//   }
+//
+//   loadAvailableFiles(): void {
+//     this.creFileService.listFiles(this.structureId).subscribe(
+//       (files) => {
+//         console.log("Chargement des fichiers pour structureId", this.structureId, files);
+//         this.availableFiles = files;
+//         if (files.length > 0) {
+//           this.selectedFile = files[0]; // Sélection par défaut
+//         } else {
+//           this.selectedFile = '';
+//         }
+//         // Forcer la détection des changements
+//         this.cdRef.detectChanges();
+//       },
+//       (error) => {
+//         console.error("Erreur lors du chargement des fichiers disponibles", error);
+//       }
+//     );
+//   }
+//
+//   onFileSelected(event: any): void {
+//     this.selectedFiles = Array.from(event.target.files);
+//   }
+//
+//   // uploadFiles(): void {
+//   //   if (!this.structureId || this.selectedFiles.length === 0) {
+//   //     this.message = "Sélectionnez au moins un fichier et vérifiez la structure.";
+//   //     return;
+//   //   }
+//   //   this.creFileService.uploadFiles(this.structureId, this.selectedFiles).subscribe(
+//   //     res => {
+//   //       this.message = "Fichiers chargés avec succès.";
+//   //       this.selectedFiles = [];
+//   //       this.loadAvailableFiles(); // Recharge la liste après upload
+//   //     },
+//   //     err => {
+//   //       console.error(err);
+//   //       this.message = "Erreur lors du chargement des fichiers.";
+//   //     }
+//   //   );
+//   // }
+//
+//
+//   uploadFiles(): void {
+//     this.message = ''; // Réinitialiser le message avant de commencer
+//
+//     if (!this.structureId || this.selectedFiles.length === 0) {
+//       this.message = "Sélectionnez au moins un fichier et vérifiez la structure.";
+//       return;
+//     }
+//
+//     this.creFileService.uploadFiles(this.structureId, this.selectedFiles).subscribe(
+//       res => {
+//         console.log("Réponse du serveur:", res);
+//         this.message = "Fichiers chargés avec succès.";
+//         this.selectedFiles = [];
+//         this.loadAvailableFiles(); // Recharge la liste après upload
+//       },
+//       err => {
+//         console.error("Erreur lors du chargement des fichiers:", err);
+//         this.message = "Erreur lors du chargement des fichiers.";
+//       }
+//     );
+//   }
+//   downloadFile(): void {
+//     if (!this.selectedFile) {
+//       this.message = "Veuillez sélectionner un fichier à télécharger.";
+//       return;
+//     }
+//     this.creFileService.downloadUploadedFile(this.structureId, this.selectedFile).subscribe(
+//       blob => {
+//         const url = window.URL.createObjectURL(blob);
+//         const a = document.createElement('a');
+//         a.href = url;
+//         a.download = this.selectedFile;
+//         a.click();
+//         window.URL.revokeObjectURL(url);
+//       },
+//       err => {
+//         console.error("Erreur lors du téléchargement", err);
+//         this.message = "Erreur lors du téléchargement du fichier.";
+//       }
+//     );
+//   }
+//
+//   // generateFile(): void {
+//   //   if (!this.structureId) {
+//   //     this.message = "Sélectionnez une structure.";
+//   //     return;
+//   //   }
+//   //   this.creFileService.generateCreFile(this.structureId).subscribe(
+//   //     blob => {
+//   //       const url = window.URL.createObjectURL(blob);
+//   //       const a = document.createElement('a');
+//   //       a.href = url;
+//   //       a.download = `CRE_structure_${this.structureId}.txt`;
+//   //       a.click();
+//   //       window.URL.revokeObjectURL(url);
+//   //     },
+//   //     err => {
+//   //       console.error(err);
+//   //       this.message = "Erreur lors de la génération du fichier CRE.";
+//   //     }
+//   //   );
+//   // }
+//
+//   generateFile(): void {
+//     if (!this.structureId) {
+//       this.message = "Sélectionnez une structure.";
+//       return;
+//     }
+//     this.creFileService.generateCreFile(this.structureId).subscribe(
+//       blob => {
+//         const url = window.URL.createObjectURL(blob);
+//         const a = document.createElement('a');
+//         a.href = url;
+//         a.download = `CRE_structure_${this.structureId}.txt`;
+//         a.click();
+//         window.URL.revokeObjectURL(url);
+//       },
+//       err => {
+//         console.error(err);
+//         this.message = "Erreur lors de la génération du fichier CRE.";
+//       }
+//     );
+//   }
+//
+// }
+import { Component, OnInit } from '@angular/core';
+import { CreFileService } from '../../services/cre-file.service';
+import { StructureCREService} from '../../services/structure-cre.service';
+import { StructureCRE } from '../../models/structure-cre.model';
+
+@Component({
+  selector: 'app-cre-file',
+  templateUrl: './cre-file.component.html',
+  styleUrls: ['./cre-file.component.css']
+})
+export class CreFileComponent implements OnInit {
+  // Liste des structures pour le <select>
+  structures: StructureCRE[] = [];
+  // Structure sélectionnée
+  selectedStructureId?: number;
+
+  // Pour l'upload
+  selectedFiles: File[] = [];
+  message: string = '';
+
+  // Pour la liste des fichiers déjà chargés
+  availableFiles: string[] = [];
+  selectedFile: string = '';
+
+  constructor(
+    private creFileService: CreFileService,
+    private structureService: StructureCREService
+  ) {}
+
+  ngOnInit(): void {
+    // Charger la liste des structures
+    this.structureService.getStructures().subscribe({
+      next: (data) => {
+        this.structures = data;
+        // Pré-sélectionner la première si disponible
+        if (this.structures.length > 0) {
+          this.selectedStructureId = this.structures[0].id;
+          this.loadAvailableFiles(); // Charger les fichiers pour la première structure
+        }
+      },
+      error: (err) => {
+        console.error("Erreur lors du chargement des structures", err);
+        this.message = "Erreur lors du chargement des structures.";
+      }
+    });
+  }
+
+  // Charger la liste des fichiers pour la structure sélectionnée
+  loadAvailableFiles(): void {
+    if (!this.selectedStructureId) {
+      console.warn('Aucune structure sélectionnée, impossible de charger les fichiers');
+      return;
+    }
+    
+    console.log(`Chargement des fichiers pour la structure ID: ${this.selectedStructureId}`);
+    
+    this.creFileService.listFiles(this.selectedStructureId).subscribe({
+      next: (files) => {
+        console.log('Fichiers chargés avec succès:', files);
+        this.availableFiles = files;
+        if (files.length > 0) {
+          this.selectedFile = files[0];
+        } else {
+          this.selectedFile = '';
+          this.message = "Aucun fichier disponible pour cette structure.";
+        }
+      },
+      error: (err) => {
+        console.error("Erreur lors du chargement des fichiers", err);
+        // Message plus descriptif pour l'utilisateur
+        if (err.status === 0) {
+          this.message = "Impossible de se connecter au serveur. Vérifiez que le service de fichiers CRE est démarré.";
+        } else if (err.status === 500) {
+          this.message = "Erreur interne du serveur. Veuillez contacter l'administrateur.";
+        } else {
+          this.message = `Erreur lors du chargement des fichiers: ${err.message || 'Erreur inconnue'}`;
+        }
+        // Réinitialiser les listes
+        this.availableFiles = [];
+        this.selectedFile = '';
+      }
+    });
+  }
+
+  // Appelé quand on change la structure dans le <select>
+  onStructureChange(): void {
+    this.loadAvailableFiles();
+  }
+
+  onFileSelected(event: any): void {
+    this.selectedFiles = Array.from(event.target.files);
+  }
+
+  uploadFiles(): void {
+    if (!this.selectedStructureId) {
+      this.message = "Veuillez sélectionner une structure.";
+      return;
+    }
+    if (this.selectedFiles.length === 0) {
+      this.message = "Veuillez sélectionner au moins un fichier.";
+      return;
+    }
+    this.creFileService.uploadFiles(this.selectedStructureId, this.selectedFiles).subscribe({
+      next: () => {
+        this.message = "Fichier(s) chargé(s) avec succès.";
+        this.loadAvailableFiles();
+      },
+      error: (err) => {
+        console.error("Erreur lors du chargement des fichiers", err);
+        this.message = "Erreur lors du chargement des fichiers.";
+      }
+    });
+  }
+
+  downloadFile(): void {
+    if (!this.selectedStructureId) {
+      this.message = "Veuillez sélectionner une structure.";
+      return;
+    }
+    if (!this.selectedFile) {
+      this.message = "Veuillez sélectionner un fichier à télécharger.";
+      return;
+    }
+    this.creFileService.downloadUploadedFile(this.selectedStructureId, this.selectedFile).subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = this.selectedFile;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        console.error("Erreur lors du téléchargement du fichier", err);
+        this.message = "Erreur lors du téléchargement du fichier.";
+      }
+    });
+  }
+
+  generateFile(): void {
+    if (!this.selectedStructureId) {
+      this.message = "Veuillez sélectionner une structure.";
+      return;
+    }
+    this.creFileService.generateCreFile(this.selectedStructureId).subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `CRE_structure_${this.selectedStructureId}.txt`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        console.error("Erreur lors de la génération du fichier CRE", err);
+        this.message = "Erreur lors de la génération du fichier CRE.";
+      }
+    });
+  }
+}
+
+
+
+

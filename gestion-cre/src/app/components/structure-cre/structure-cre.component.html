@@ -1,0 +1,138 @@
+
+
+<!--&lt;!&ndash;structure-cre.component.html&ndash;&gt;-->
+<!--<div class="container mt-5">-->
+<!--  <h2 class="text-center">Gestion des Structures CRE</h2>-->
+
+<!--  <div *ngIf="errorMessage" class="alert alert-danger">-->
+<!--    {{ errorMessage }}-->
+<!--  </div>-->
+
+<!--  &lt;!&ndash; Formulaire d'ajout &ndash;&gt;-->
+<!--  <div class="card mt-4">-->
+<!--    <div class="card-body">-->
+<!--      <h5 class="card-title">Ajouter une nouvelle structure</h5>-->
+<!--      <form (ngSubmit)="addStructure()">-->
+<!--        <div class="mb-3">-->
+<!--          <label for="nomStructure" class="form-label">Nom de la structure</label>-->
+<!--          <input type="text" id="nomStructure" class="form-control" [(ngModel)]="newStructure.nomStructure" name="nomStructure" required>-->
+<!--        </div>-->
+<!--        <button type="submit" class="btn btn-primary">Ajouter</button>-->
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  &lt;!&ndash; Liste des structures existantes &ndash;&gt;-->
+<!--  <div class="card mt-4">-->
+<!--    <div class="card-body">-->
+<!--      <h5 class="card-title">Structures existantes</h5>-->
+<!--      <ul class="list-group">-->
+<!--        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let structure of structures">-->
+<!--          <span>{{ structure.nomStructure }} - {{ structure.dateCreation | date:'dd/MM/yyyy' }}</span>-->
+<!--          <div>-->
+<!--            <button class="btn btn-info btn-sm me-2" (click)="consultStructure(structure)">Consulter</button>-->
+<!--            <button class="btn btn-primary btn-sm me-2" (click)="editStructure(structure)">Modifier</button>-->
+<!--            <button class="btn btn-danger btn-sm" (click)="deleteStructure(structure)">Supprimer</button>-->
+<!--          </div>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Composant de gestion des champs &ndash;&gt;-->
+<!--<app-champ-cre-->
+<!--  *ngIf="selectedStructureId && selectedStructureName"-->
+<!--  [structureId]="selectedStructureId"-->
+<!--  [structureName]="selectedStructureName"-->
+<!--  [mode]="mode">-->
+<!--</app-champ-cre>-->
+
+
+<!--<app-cre-file *ngIf="selectedStructureId" [structureId]="selectedStructureId"></app-cre-file>-->
+
+<!--<app-cre-validation *ngIf="selectedStructureId" [structureId]="selectedStructureId"></app-cre-validation>-->
+
+<!--<app-import-structure> </app-import-structure>-->
+<!--<app-cre-validation *ngIf="selectedStructureId" [structureId]="selectedStructureId"></app-cre-validation>-->
+
+<!--//////////////////-->
+<!--structure-cre.component.html-->
+
+<div class="container mt-5">
+  <h2 class="text-center">Gestion des Structures CRE</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Formulaire d'ajout d'une nouvelle structure -->
+  <div class="card mt-4">
+    <div class="card-body">
+      <h5 class="card-title">Ajouter une nouvelle structure</h5>
+      <form (ngSubmit)="addStructure()">
+        <div class="mb-3">
+          <label for="nomStructure" class="form-label">Nom de la structure</label>
+          <input type="text" id="nomStructure" class="form-control" [(ngModel)]="newStructure.nomStructure" name="nomStructure" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Liste des structures existantes -->
+  <div class="card mt-4">
+    <div class="card-body">
+      <h5 class="card-title">Structures existantes</h5>
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let structure of structures">
+          <span>{{ structure.nomStructure }} - {{ structure.dateCreation | date:'dd/MM/yyyy HH:mm:ss' }}</span>
+          <div>
+            <button class="btn btn-info btn-sm me-2" (click)="consultStructure(structure)">Consulter</button>
+            <button class="btn btn-primary btn-sm me-2" (click)="editStructure(structure)">Modifier</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteStructure(structure)">Supprimer</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Composant de gestion des champs pour définir/modifier une structure -->
+  <app-champ-cre
+    *ngIf="selectedStructureId && selectedStructureName"
+    [structureId]="selectedStructureId"
+    [structureName]="selectedStructureName"
+    [mode]="mode">
+  </app-champ-cre>
+
+  <!-- Workflow d'importation, validation et chargement d'un fichier CRE -->
+  <div class="card mt-4">
+    <div class="card-body">
+      <h5 class="card-title">Importer et valider un fichier CRE</h5>
+      <!-- Ce composant gère :
+           - la sélection d'un fichier CRE,
+           - la validation du fichier par rapport à la structure sélectionnée,
+           - l'affichage des erreurs (si non conforme) avec possibilité de "charger quand même" ou "annuler",
+           - et le chargement effectif du fichier.
+      -->
+      <app-cre-file-flow
+        *ngIf="selectedStructureId && selectedStructureName"
+        [structureId]="selectedStructureId"
+        [structureName]="selectedStructureName"
+        [mode]="mode">
+      </app-cre-file-flow>
+
+
+    </div>
+  </div>
+
+  <!-- Optionnel : composant pour importer des structures CRE depuis un fichier Excel -->
+<!--  <app-import-structure></app-import-structure>-->
+
+
+  <app-import-structure (importSuccess)="reloadStructures()"></app-import-structure>
+
+</div>
+
+<!--/////////////////////-->
+

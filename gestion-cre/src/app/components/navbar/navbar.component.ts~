@@ -1,0 +1,61 @@
+import { Component, OnInit } from '@angular/core';
+import { LanguageService } from '../../services/language.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { map, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+
+@Component({
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.css']
+})
+export class NavbarComponent implements OnInit {
+  isLoggedIn = false;
+  username = 'Utilisateur';
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.authService.isAuthenticated().subscribe(isAuthenticated => {
+      this.isLoggedIn = isAuthenticated;
+      if (isAuthenticated) {
+        this.loadUsername();
+      }
+    });
+  }
+
+  loadUsername(): void {
+    // Utiliser directement getUserInfo pour obtenir le nom d'utilisateur
+    this.authService.getUserInfo().pipe(
+      map(userInfo => {
+        console.log('User info received:', userInfo);
+        return userInfo.username || userInfo.preferred_username || userInfo.sub || 'Utilisateur';
+      }),
+      catchError(error => {
+        console.error('Error getting username:', error);
+        return of('Utilisateur');
+      })
+    ).subscribe(username => {
+      console.log('Setting username to:', username);
+      this.username = username;
+    });
+  }
+
+  logout(): void {
+    this.authService.logout().subscribe({
+      next: () => {
+        console.log('Logout successful');
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        console.error('Logout error:', err);
+        this.router.navigate(['/login']);
+      }
+    });
+  }
+
+  switchLanguage(lang: string): void {
+    this.languageService.setLanguage(lang);
+  }
+}

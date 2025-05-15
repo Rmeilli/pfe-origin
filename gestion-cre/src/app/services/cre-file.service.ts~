@@ -1,0 +1,98 @@
+// import { Injectable } from '@angular/core';
+// import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
+// import { Observable } from 'rxjs';
+//
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class CreFileService {
+//   private apiUrl = 'http://localhost:8080/api/crefiles';
+//
+//   constructor(private http: HttpClient) {}
+//
+//   uploadFiles(structureId: number, files: File[]): Observable<any> {
+//     const formData: FormData = new FormData();
+//     formData.append('structureId', structureId.toString());
+//     files.forEach(file => {
+//       formData.append('files', file, file.name);
+//     });
+//
+//     return this.http.post(`${this.apiUrl}/upload`, formData);
+//   }
+//
+//   generateCreFile(structureId: number): Observable<Blob> {
+//     return this.http.get(`${this.apiUrl}/generate/${structureId}`, { responseType: 'blob' });
+//   }
+//
+//
+//   downloadUploadedFile(fileName: string): Observable<Blob> {
+//     return this.http.get(`${this.apiUrl}/download/${fileName}`, { responseType: 'blob' });
+//   }
+//
+// }
+
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CreFileService {
+  private apiUrl = 'http://localhost:8080/api/crefiles';  // Assurez-vous que cette URL correspond à votre configuration
+
+  constructor(private http: HttpClient) {}
+
+  uploadFiles(structureId: number, files: File[]): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('structureId', structureId.toString());
+    files.forEach(file => {
+      formData.append('files', file, file.name);
+    });
+    return this.http.post(`${this.apiUrl}/upload`, formData,{responseType : "text"});
+  }
+
+
+  // generateCreFile(structureId: number): Observable<Blob> {
+  //   return this.http.get(`${this.apiUrl}/generate/${structureId}`, { responseType: 'blob' });
+  // }
+
+  // downloadUploadedFile(fileName: string): Observable<Blob> {
+  //   return this.http.get(`${this.apiUrl}/download/${fileName}`, { responseType: 'blob' });
+  // }
+  //
+  // // Nouvelle méthode pour lister les fichiers disponibles
+  // listFiles(structureId: number): Observable<string[]> {
+  //   return this.http.get<string[]>(`${this.apiUrl}/list/${structureId}`);
+  // }
+
+  downloadUploadedFile(structureId: number, fileName: string): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/download/${structureId}/${fileName}`, { responseType: 'blob' });
+  }
+
+  // listFiles(structureId: number): Observable<string[]> {
+  //   return this.http.get<string[]>(`${this.apiUrl}/list/${structureId}`);
+  // }
+
+  listFiles(structureId: number): Observable<string[]> {
+    const url = `${this.apiUrl}/list/${structureId}?t=${new Date().getTime()}`;
+    return this.http.get<string[]>(url);
+  }
+  // validateCreFile(structureId: number, file: File): Observable<any> {
+  //   const formData: FormData = new FormData();
+  //   formData.append('file', file, file.name);
+  //   // On utilise l'URL complète si nécessaire
+  //   return this.http.post<any>(`http://localhost:8080/api/crefiles/validate/${structureId}`, formData);
+  // }
+  validateCreFile(structureId: number, file: File): Observable<string> {
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+    return this.http.post(`http://localhost:8080/api/crefiles/validate/${structureId}`, formData, { responseType: 'text' });
+  }
+
+  generateCreFile(structureId: number, lines: number = 100): Observable<Blob> {
+    return this.http.get(`http://localhost:8080/api/crefiles/generate/${structureId}?lines=${lines}`, { responseType: 'blob' });
+  }
+
+
+}

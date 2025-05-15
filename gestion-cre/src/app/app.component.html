@@ -1,0 +1,15 @@
+<app-navbar>
+  <div class="navbar-nav ms-auto" *ngIf="isLoggedIn">
+    <button class="btn btn-outline-light" (click)="logout()">
+      <i class="bi bi-box-arrow-right"></i> Déconnexion
+    </button>
+  </div>
+</app-navbar>
+<router-outlet></router-outlet>
+<!-- Remove this duplicate logout button -->
+<!-- <div class="navbar-nav ms-auto" *ngIf="isLoggedIn">
+  <button class="btn btn-outline-light" (click)="logout()">
+    <i class="bi bi-box-arrow-right"></i> Déconnexion
+  </button>
+</div> -->
+

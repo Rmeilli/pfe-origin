@@ -1,0 +1,120 @@
+<!--<div class="container mt-4">-->
+<!--  <h4>Importer des structures CRE depuis un fichier Excel</h4>-->
+<!--  <div *ngIf="message" class="alert alert-info">{{ message }}</div>-->
+<!--  <div class="mb-3">-->
+<!--    <input type="file" (change)="onFileSelected($event)" class="form-control">-->
+<!--  </div>-->
+<!--  <button class="btn btn-primary" (click)="importFile()">Importer</button>-->
+<!--</div>-->
+
+<!-- import-structure.component.html -->
+<!--//////////////////////////-->
+
+<!--<div class="container mt-4">-->
+<!--  <h4>Importer une structure CRE (avec prévisualisation)</h4>-->
+<!--  <div *ngIf="message" class="alert alert-info">{{ message }}</div>-->
+
+<!--  &lt;!&ndash; Sélection du fichier &ndash;&gt;-->
+<!--  <input type="file" (change)="onFileSelected($event)" class="form-control mb-2" />-->
+<!--  <button class="btn btn-primary mb-3" (click)="importPreview()">Importer et prévisualiser structure CRE</button>-->
+
+<!--  &lt;!&ndash; Affichage de la preview si disponible &ndash;&gt;-->
+<!--  <div *ngIf="preview">-->
+<!--    <h5>Nom de la structure :</h5>-->
+<!--    <input type="text" class="form-control mb-3" [(ngModel)]="preview.proposedName" />-->
+
+<!--    <h5>Champs importés :</h5>-->
+<!--    <table class="table table-bordered">-->
+<!--      <thead>-->
+<!--      <tr>-->
+<!--        <th>Nom de zone</th>-->
+<!--        <th>Pos</th>-->
+<!--        <th>Long</th>-->
+<!--        <th>Déc</th>-->
+<!--        <th>Format</th>-->
+<!--        <th>Désignation</th>-->
+<!--      </tr>-->
+<!--      </thead>-->
+<!--      <tbody>-->
+<!--      <tr *ngFor="let champ of preview.champs">-->
+<!--        <td><input type="text" [(ngModel)]="champ.nomZone" class="form-control"></td>-->
+<!--        <td><input type="number" [(ngModel)]="champ.pos" class="form-control"></td>-->
+<!--        <td><input type="number" [(ngModel)]="champ.longCol" class="form-control"></td>-->
+<!--        <td><input type="number" [(ngModel)]="champ.dec" class="form-control"></td>-->
+<!--        <td><input type="text" [(ngModel)]="champ.format" class="form-control"></td>-->
+<!--        <td><input type="text" [(ngModel)]="champ.designationBcp" class="form-control"></td>-->
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--    </table>-->
+
+<!--    &lt;!&ndash; Bouton pour confirmer l'importation &ndash;&gt;-->
+<!--    <button class="btn btn-success" (click)="confirmImport()">Confirmer l'importation</button>-->
+<!--  </div>-->
+<!--    <div #errorDiv *ngIf="errorMessage" class="alert alert-danger">-->
+<!--      {{ errorMessage }}-->
+<!--    </div>-->
+<!--</div>-->
+
+<div class="container mt-4">
+  <!-- Zone du message d'erreur avec référence template -->
+<!--  <div #errorDiv *ngIf="message" class="alert alert-danger">-->
+<!--    {{ message }}-->
+<!--  </div>-->
+  <div #errorDiv [ngClass]="{'success-message': messageType === 'success', 'error-message': messageType === 'error'}">
+    {{ message }}
+  </div>
+
+  <h4>Importer des structures CRE depuis un fichier Excel</h4>
+
+  <!-- Sélection du fichier -->
+  <div class="mb-3">
+    <input type="file" (change)="onFileSelected($event)" class="form-control">
+  </div>
+
+  <button class="btn btn-primary" (click)="importPreview()" [disabled]="isLoading">
+    <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+    {{ isLoading ? 'Chargement en cours...' : 'Charger la prévisualisation' }}
+  </button>
+
+  <!-- Indicateur de chargement -->
+  <div *ngIf="isLoading" class="mt-3 text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Chargement...</span>
+    </div>
+    <p class="mt-2">Chargement de la prévisualisation en cours...</p>
+  </div>
+
+  <!-- Affichage de la preview -->
+  <div *ngIf="preview && !isLoading" class="mt-3">
+    <h5>Prévisualisation</h5>
+    <div class="mb-2">
+      <label>Nom de la structure :</label>
+      <input type="text" class="form-control" [(ngModel)]="preview.proposedName">
+    </div>
+    <h6>Champs importés :</h6>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Nom de zone</th>
+        <th>Pos</th>
+        <th>Long</th>
+        <th>Déc</th>
+        <th>Format</th>
+        <th>Désignation</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let champ of preview.champs; let i = index">
+        <td><input type="text" class="form-control" [(ngModel)]="champ.nomZone"></td>
+        <td><input type="number" class="form-control" [(ngModel)]="champ.pos" (ngModelChange)="onPositionChange(i, $event)"></td>
+        <td><input type="number" class="form-control" [(ngModel)]="champ.longCol" (ngModelChange)="onLongColChange(i, $event)"></td>
+        <td><input type="number" class="form-control" [(ngModel)]="champ.dec"></td>
+        <td><input type="text" class="form-control" [(ngModel)]="champ.format"></td>
+        <td><input type="text" class="form-control" [(ngModel)]="champ.designationBcp"></td>
+      </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-success" (click)="confirmImport()">Confirmer l'importation</button>
+  </div>
+</div>
+

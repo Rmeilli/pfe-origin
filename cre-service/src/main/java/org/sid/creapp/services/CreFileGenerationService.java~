@@ -1,0 +1,305 @@
+
+package org.sid.creapp.services;
+
+//import org.sid.creapp.Entities.StructureCRE;
+//import org.sid.creapp.Entities.ValeurCRE;
+//import org.sid.creapp.repositories.StructureCRERepository;
+//import org.springframework.stereotype.Service;
+//import org.springframework.transaction.annotation.Transactional;
+//
+//import java.security.SecureRandom; // Remplacer Random par SecureRandom
+//import java.time.LocalDate;
+//import java.time.format.DateTimeFormatter;
+//import java.util.Comparator;
+//import java.util.List;
+
+//@Service
+//public class CreFileGenerationService {
+//
+//    private final StructureCRERepository structureCRERepository;
+//    private final SecureRandom secureRandom = new SecureRandom(); // Utiliser SecureRandom au lieu de Random
+//
+//    public CreFileGenerationService(StructureCRERepository structureCRERepository) {
+//        this.structureCRERepository = structureCRERepository;
+//    }
+//
+//    /**
+//     * Génère le contenu d'un fichier CRE à partir de la structure donnée.
+//     * @param structureId l'ID de la structure CRE
+//     * @param numberOfLines nombre de lignes (enregistrements) à générer
+//     * @return le contenu du fichier CRE sous forme de String
+//     */
+//    @Transactional(readOnly = true)
+//    public String generateCreFileContent(Long structureId, int numberOfLines) {
+//        // Récupérer la structure et ses champs
+//        StructureCRE structure = structureCRERepository.findById(structureId)
+//                .orElseThrow(() -> new RuntimeException("Structure non trouvée avec ID: " + structureId));
+//        List<ValeurCRE> fields = structure.getValeurs();
+//        // Tri par ordre de la position attendue (par exemple, par pos)
+//        fields.sort(Comparator.comparingInt(ValeurCRE::getPos));
+//
+//        StringBuilder fileContent = new StringBuilder();
+//        // Ligne d'en-tête optionnelle : ici, on peut ajouter le nom de la structure ou d'autres infos
+//        fileContent.append(structure.getNomStructure()).append("\n");
+//
+//        // Générer le nombre de lignes demandées
+//        for (int i = 0; i < numberOfLines; i++) {
+//            StringBuilder line = new StringBuilder();
+//            for (ValeurCRE field : fields) {
+//                int fieldLength = field.getLongCol();
+//                String value;
+//                // Si une valeur par défaut est définie dans designationBcp, on l'utilise
+//                if (field.getDesignationBcp() != null && !field.getDesignationBcp().trim().isEmpty()) {
+//                    value = field.getDesignationBcp().trim();
+//                } else {
+//                    // Si designationBcp est vide ou null, on remplace par des espaces
+//                    value = repeatString(" ", fieldLength);
+//                }
+//                // Forcer la valeur à avoir exactement fieldLength caractères
+//                value = formatToFixedLength(value, fieldLength);
+//                line.append(value);
+//            }
+//            fileContent.append(line.toString()).append("\n");
+//        }
+//        return fileContent.toString();
+//    }
+//
+//    // Formate la chaîne pour qu'elle soit exactement de la longueur souhaitée
+//    // Si la valeur est trop courte, on la remplit avec des espaces ; si trop longue, on la tronque.
+//    private String formatToFixedLength(String value, int length) {
+//        if (value.length() < length) {
+//            return String.format("%-" + length + "s", value);
+//        } else if (value.length() > length) {
+//            return value.substring(0, length);
+//        }
+//        return value;
+//    }
+//
+//
+//
+//
+//    // Replace " ".repeat(fieldLength) with this method
+//    private String repeatString(String str, int count) {
+//        StringBuilder sb = new StringBuilder();
+//        for (int i = 0; i < count; i++) {
+//            sb.append(str);
+//        }
+//        return sb.toString();
+//    }
+//
+//    // Génère une chaîne numérique aléatoire de la longueur spécifiée.
+//    private String generateRandomNumericString(int length) {
+//        StringBuilder sb = new StringBuilder();
+//        for (int i = 0; i < length; i++) {
+//            sb.append(secureRandom.nextInt(10)); // Utiliser secureRandom au lieu de random
+//        }
+//        return sb.toString();
+//    }
+//
+//    // Génère une chaîne de texte aléatoire (lettres majuscules) de la longueur spécifiée.
+//    private String generateRandomText(int length) {
+//        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//        StringBuilder sb = new StringBuilder();
+//        for (int i = 0; i < length; i++) {
+//            sb.append(chars.charAt(secureRandom.nextInt(chars.length()))); // Utiliser secureRandom au lieu de random
+//        }
+//        return sb.toString();
+//    }
+//}
+import org.sid.creapp.Entities.StructureCRE;
+import org.sid.creapp.Entities.ValeurCRE;
+import org.sid.creapp.repositories.StructureCRERepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.security.SecureRandom;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+@Service
+public class CreFileGenerationService {
+
+    private final StructureCRERepository structureCRERepository;
+    private final SecureRandom secureRandom = new SecureRandom();
+
+    public CreFileGenerationService(StructureCRERepository structureCRERepository) {
+        this.structureCRERepository = structureCRERepository;
+    }
+
+    /**
+     * Génère le contenu d'un fichier CRE à partir de la structure donnée.
+     *
+     * @param structureId   l'ID de la structure CRE
+     * @param numberOfLines nombre de lignes à générer
+     * @return contenu du fichier CRE en texte
+     */
+    @Transactional(readOnly = true)
+    public String generateCreFileContent(Long structureId, int numberOfLines) {
+        StructureCRE structure = structureCRERepository.findById(structureId)
+                .orElseThrow(() -> new RuntimeException("Structure non trouvée avec ID: " + structureId));
+
+        List<ValeurCRE> fields = structure.getValeurs();
+        fields.sort(Comparator.comparingInt(ValeurCRE::getPos));
+
+        StringBuilder fileContent = new StringBuilder();
+        // Entête facultative
+        fileContent.append(structure.getNomStructure()).append("\n");
+
+        // Calculer la longueur totale de la ligne basée sur l'exemple
+        int totalLineLength = 1000; // Longueur fixe basée sur l'exemple
+        
+        for (int i = 0; i < numberOfLines; i++) {
+            // Initialiser la ligne avec des espaces
+            char[] lineChars = new char[totalLineLength];
+            Arrays.fill(lineChars, ' ');
+            
+            // Pour chaque champ dans la structure
+            for (ValeurCRE field : fields) {
+                int pos = field.getPos();           // Position du champ (1-indexé)
+                int len = field.getLongCol();       // Longueur du champ
+                String format = field.getFormat() != null ? field.getFormat().toUpperCase() : "TEXT"; 
+                String def = field.getDesignationBcp();
+                String nomCol = field.getNomCol() != null ? field.getNomCol().toUpperCase() : "";
+                
+                // Vérifier que la position est valide (position est 1-indexée, donc -1 pour l'index du tableau)
+                int startPos = pos - 1;
+                if (startPos + len > lineChars.length) {
+                    continue; // Ignorer ce champ s'il dépasse la longueur de la ligne
+                }
+                
+                // Générer la valeur selon le format et la désignation
+                String value;
+                
+                // Cas spéciaux pour CR_COOPER, APPLID et SOUS_CODE
+                if (nomCol.equals("CR_COOPER") || nomCol.equals("APPLID") || nomCol.equals("SOUS_CODE")) {
+                    if (def != null && !def.trim().isEmpty()) {
+                        value = formatToFixedLength(def, len);
+                    } else {
+                        // Si pas de valeur par défaut, générer du texte aléatoire
+                        value = generateRandomAlphaString(len);
+                    }
+                } else if (def != null && !def.trim().isEmpty() && def.toLowerCase().contains("blanc")) {
+                    // Si la désignation contient "blanc", générer des espaces
+                    value = repeat(" ", len);
+                } else {
+                    // Pour tous les autres champs, générer des valeurs numériques
+                    switch (format) {
+                        case "DECIMAL":
+                        case "DECIMALE":
+                            int decs = field.getDec() != null ? field.getDec() : 0;
+                            String intPart = generateRandomNumericString(len - decs - (decs > 0 ? 1 : 0));
+                            String decPart = decs > 0 ? generateRandomNumericString(decs) : "";
+                            value = decs > 0 ? intPart + "." + decPart : intPart;
+                            break;
+                        case "DATETIME":
+                            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyMMdd");
+                            String date = dateFormatter.format(LocalDate.now());
+                            value = formatToFixedLength(date, len);
+                            break;
+                        case "TEXT":
+                        case "NUMERIC":
+                        case "NUMERIQUE":
+                        default:
+                            // Par défaut, générer des valeurs numériques
+                            value = generateRandomNumericString(len);
+                            break;
+                    }
+                }
+                
+                // Placer la valeur dans la ligne à la position exacte
+                value = formatToFixedLength(value, len);
+                for (int j = 0; j < value.length() && j < len; j++) {
+                    lineChars[startPos + j] = value.charAt(j);
+                }
+            }
+            
+            // Ajouter l'identifiant CRE au début de la ligne (position fixe basée sur l'exemple)
+            String crePrefix = "9010TI";
+            int prefixPos = 130; // Position observée dans l'exemple
+            for (int j = 0; j < crePrefix.length(); j++) {
+                if (prefixPos + j < lineChars.length) {
+                    lineChars[prefixPos + j] = crePrefix.charAt(j);
+                }
+            }
+            
+            // Ajouter un identifiant unique pour la ligne (comme CRE77988923700 dans l'exemple)
+            String lineId = String.format("CRE%08d", 77988923700L + i);
+            int idPos = prefixPos + crePrefix.length();
+            for (int j = 0; j < lineId.length() && idPos + j < lineChars.length; j++) {
+                lineChars[idPos + j] = lineId.charAt(j);
+            }
+            
+            fileContent.append(lineChars).append("\n");
+        }
+        
+        return fileContent.toString();
+    }
+    
+    // Méthode pour calculer la longueur totale d'une ligne
+    private int calculateTotalLineLength(List<ValeurCRE> fields) {
+        if (fields.isEmpty()) {
+            return 0;
+        }
+        
+        ValeurCRE lastField = fields.stream()
+                .max(Comparator.comparingInt(f -> f.getPos() + f.getLongCol()))
+                .orElse(null);
+        
+        return lastField != null ? lastField.getPos() + lastField.getLongCol() - 1 : 0;
+    }
+    
+    // Méthode pour générer une chaîne alphanumérique aléatoire
+    private String generateRandomAlphaString(int length) {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int index = secureRandom.nextInt(chars.length());
+            sb.append(chars.charAt(index));
+        }
+        return sb.toString();
+    }
+    
+    // Méthode pour extraire un nombre d'une chaîne
+    private Optional<Integer> extractNumber(String text) {
+        Pattern pattern = Pattern.compile("\\d+");
+        Matcher matcher = pattern.matcher(text);
+        if (matcher.find()) {
+            return Optional.of(Integer.parseInt(matcher.group()));
+        }
+        return Optional.empty();
+    }
+
+    // Crée une chaîne répétée
+    private String repeat(String c, int count) {
+        return IntStream.range(0, count)
+                .mapToObj(i -> c)
+                .collect(Collectors.joining());
+    }
+
+    // Vérifie que la chaîne est composée d'un seul caractère répété
+    private boolean isAllSameChar(String s, char ch) {
+        return s.chars().allMatch(c -> c == ch);
+    }
+
+    // Formate à longueur fixe (complète à droite ou tronque)
+    private String formatToFixedLength(String v, int len) {
+        if (v.length() < len)  return String.format("%-" + len + "s", v);
+        if (v.length() > len)  return v.substring(0, len);
+        return v;
+    }
+
+    // Génère un nombre aléatoire de longueur spécifiée
+    private String generateRandomNumericString(int length) {
+        return secureRandom.ints(length, 0, 10)
+                .mapToObj(String::valueOf)
+                .collect(Collectors.joining());
+    }
+}

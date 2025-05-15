@@ -1,0 +1,266 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"a84efce5-3c41-4918-97d4-b8b8f0208880\" name=\"Changes\" comment=\"commit du 02/05/2025 à 11h30\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/controller/AuthController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/controller/AuthController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cre-service/pom.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/cre-service/pom.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cre-service/src/main/java/org/sid/creapp/Controllers/StructureCREController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/cre-service/src/main/java/org/sid/creapp/Controllers/StructureCREController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cre-service/src/main/java/org/sid/creapp/Controllers/ValeurCREController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/cre-service/src/main/java/org/sid/creapp/Controllers/ValeurCREController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cre-service/src/main/java/org/sid/creapp/services/CreFileGenerationService.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/cre-service/src/main/java/org/sid/creapp/services/CreFileGenerationService.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/cre-service/src/test/java/org/sid/creapp/CrEappApplicationTests.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/cre-service/src/test/java/org/sid/creapp/CrEappApplicationTests.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/pom.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/pom.xml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Dockerfile\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/cre-service\" />\r\n    <option name=\"ROOT_SYNC\" value=\"DONT_SYNC\" />\r\n  </component>\r\n  <component name=\"JpbToolWindowState\">\r\n    <option name=\"isToolWindowVisible\" value=\"false\" />\r\n  </component>\r\n  <component name=\"KubernetesApiProvider\">{\r\n  &quot;isMigrated&quot;: true\r\n}</component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"CurrentFile\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 0\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2vUWYar6jfC8e6mbLEqcxEn2FPZ\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RequestMappingsPanelOrder0\": \"0\",\r\n    \"RequestMappingsPanelOrder1\": \"1\",\r\n    \"RequestMappingsPanelWidth0\": \"75\",\r\n    \"RequestMappingsPanelWidth1\": \"75\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"Spring Boot.AuthServiceApplication (1).executor\": \"Run\",\r\n    \"Spring Boot.AuthServiceApplication.executor\": \"Run\",\r\n    \"Spring Boot.CrEappApplication.executor\": \"Run\",\r\n    \"Spring Boot.EurekaServerApplication.executor\": \"Run\",\r\n    \"com.codeium.enabled\": \"true\",\r\n    \"git-widget-placeholder\": \"main\",\r\n    \"jdk.selected.JAVA_MODULE\": \"openjdk-22\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/User/Downloads/ProjetBp_micro_services/cre-service\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"run.configurations.included.in.services\": \"true\",\r\n    \"settings.editor.selected.configurable\": \"Errors\",\r\n    \"ts.external.directory.path\": \"C:\\\\Users\\\\User\\\\Downloads\\\\ProjetBp_micro_services\\\\gestion-cre\\\\node_modules\\\\typescript\\\\lib\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\User\\Downloads\\ProjetBp_micro_services\\auth-service\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunDashboard\">\r\n    <option name=\"configurationTypes\">\r\n      <set>\r\n        <option value=\"MicronautRunConfigurationType\" />\r\n        <option value=\"QuarkusRunConfigurationType\" />\r\n        <option value=\"SpringBootApplicationConfigurationType\" />\r\n      </set>\r\n    </option>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Spring Boot.AuthServiceApplication\">\r\n    <configuration name=\"AuthServiceApplication (1)\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\r\n      <module name=\"auth-service (1)\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"org.sid.authservice.AuthServiceApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"AuthServiceApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\r\n      <module name=\"auth-service\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"org.sid.authservice.AuthServiceApplication\" />\r\n      <extension name=\"net.ashald.envfile\">\r\n        <option name=\"IS_ENABLED\" value=\"false\" />\r\n        <option name=\"IS_SUBST\" value=\"false\" />\r\n        <option name=\"IS_PATH_MACRO_SUPPORTED\" value=\"false\" />\r\n        <option name=\"IS_IGNORE_MISSING_FILES\" value=\"false\" />\r\n        <option name=\"IS_ENABLE_EXPERIMENTAL_INTEGRATIONS\" value=\"false\" />\r\n        <ENTRIES>\r\n          <ENTRY IS_ENABLED=\"true\" PARSER=\"runconfig\" IS_EXECUTABLE=\"false\" />\r\n        </ENTRIES>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"CrEappApplication (1)\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\r\n      <module name=\"cre-service\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"org.sid.creapp.CrEappApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"CrEappApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\r\n      <module name=\"cre-service (1)\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"org.sid.creapp.CrEappApplication\" />\r\n      <extension name=\"net.ashald.envfile\">\r\n        <option name=\"IS_ENABLED\" value=\"false\" />\r\n        <option name=\"IS_SUBST\" value=\"false\" />\r\n        <option name=\"IS_PATH_MACRO_SUPPORTED\" value=\"false\" />\r\n        <option name=\"IS_IGNORE_MISSING_FILES\" value=\"false\" />\r\n        <option name=\"IS_ENABLE_EXPERIMENTAL_INTEGRATIONS\" value=\"false\" />\r\n        <ENTRIES>\r\n          <ENTRY IS_ENABLED=\"true\" PARSER=\"runconfig\" IS_EXECUTABLE=\"false\" />\r\n        </ENTRIES>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"EurekaServerApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\r\n      <module name=\"eureka-server\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.example.eurekaserver.EurekaServerApplication\" />\r\n      <extension name=\"net.ashald.envfile\">\r\n        <option name=\"IS_ENABLED\" value=\"false\" />\r\n        <option name=\"IS_SUBST\" value=\"false\" />\r\n        <option name=\"IS_PATH_MACRO_SUPPORTED\" value=\"false\" />\r\n        <option name=\"IS_IGNORE_MISSING_FILES\" value=\"false\" />\r\n        <option name=\"IS_ENABLE_EXPERIMENTAL_INTEGRATIONS\" value=\"false\" />\r\n        <ENTRIES>\r\n          <ENTRY IS_ENABLED=\"true\" PARSER=\"runconfig\" IS_EXECUTABLE=\"false\" />\r\n        </ENTRIES>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Spring Boot.CrEappApplication (1)\" />\r\n      <item itemvalue=\"Spring Boot.AuthServiceApplication (1)\" />\r\n      <item itemvalue=\"Spring Boot.CrEappApplication\" />\r\n      <item itemvalue=\"Spring Boot.AuthServiceApplication\" />\r\n      <item itemvalue=\"Spring Boot.EurekaServerApplication\" />\r\n    </list>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"jdk-22-openjdk-22-4caba194b151-f504ca98\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"a84efce5-3c41-4918-97d4-b8b8f0208880\" name=\"Changes\" comment=\"\" />\r\n      <created>1744200185870</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1744200185870</updated>\r\n      <workItem from=\"1744200187032\" duration=\"10000\" />\r\n      <workItem from=\"1744207856947\" duration=\"4706000\" />\r\n      <workItem from=\"1744270321569\" duration=\"6284000\" />\r\n      <workItem from=\"1744291560175\" duration=\"3463000\" />\r\n      <workItem from=\"1744357077095\" duration=\"9760000\" />\r\n      <workItem from=\"1744378947791\" duration=\"970000\" />\r\n      <workItem from=\"1744381606297\" duration=\"3947000\" />\r\n      <workItem from=\"1744554121785\" duration=\"13843000\" />\r\n      <workItem from=\"1744615267935\" duration=\"9441000\" />\r\n      <workItem from=\"1744638441253\" duration=\"4197000\" />\r\n      <workItem from=\"1744701700458\" duration=\"2165000\" />\r\n      <workItem from=\"1744704356957\" duration=\"3846000\" />\r\n      <workItem from=\"1744723069899\" duration=\"3183000\" />\r\n      <workItem from=\"1744788027691\" duration=\"3614000\" />\r\n      <workItem from=\"1744808594551\" duration=\"3864000\" />\r\n      <workItem from=\"1744874500018\" duration=\"9673000\" />\r\n      <workItem from=\"1744960477911\" duration=\"935000\" />\r\n      <workItem from=\"1744966170532\" duration=\"623000\" />\r\n      <workItem from=\"1744973218578\" duration=\"304000\" />\r\n      <workItem from=\"1744983489936\" duration=\"763000\" />\r\n      <workItem from=\"1745219896244\" duration=\"593000\" />\r\n      <workItem from=\"1745243420401\" duration=\"581000\" />\r\n      <workItem from=\"1745244067860\" duration=\"1440000\" />\r\n      <workItem from=\"1745245870369\" duration=\"6162000\" />\r\n      <workItem from=\"1745306384864\" duration=\"8823000\" />\r\n      <workItem from=\"1745327799560\" duration=\"8091000\" />\r\n      <workItem from=\"1745392872056\" duration=\"3720000\" />\r\n      <workItem from=\"1745413449390\" duration=\"402000\" />\r\n      <workItem from=\"1745500695073\" duration=\"6596000\" />\r\n      <workItem from=\"1745565684180\" duration=\"1952000\" />\r\n      <workItem from=\"1745588111392\" duration=\"3130000\" />\r\n      <workItem from=\"1746429609829\" duration=\"2088000\" />\r\n      <workItem from=\"1746450566542\" duration=\"387000\" />\r\n      <workItem from=\"1746516165201\" duration=\"22000\" />\r\n      <workItem from=\"1746516702893\" duration=\"4167000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"commit du 23/04/2025 à 11h30\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1745404242848</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1745404242848</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"commit du 23/04/2025 à 11h30\" />\r\n    <MESSAGE value=\"commit du 02/05/2025 à 11h30\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"commit du 02/05/2025 à 11h30\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision c4b3ca31ef59249e4b5d51c19f1d628e581c4a07)
++++ b/.idea/workspace.xml	(date 1746779516158)
+@@ -4,15 +4,15 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="a84efce5-3c41-4918-97d4-b8b8f0208880" name="Changes" comment="commit du 02/05/2025 à 11h30">
++    <list default="true" id="a84efce5-3c41-4918-97d4-b8b8f0208880" name="Changes" comment="commit(jsp) du 06/05/2025 à 12h10">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/controller/AuthController.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/cre-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cre-service/pom.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/cre-service/src/main/java/org/sid/creapp/Controllers/StructureCREController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cre-service/src/main/java/org/sid/creapp/Controllers/StructureCREController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/cre-service/src/main/java/org/sid/creapp/Controllers/ValeurCREController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cre-service/src/main/java/org/sid/creapp/Controllers/ValeurCREController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/cre-service/src/main/java/org/sid/creapp/services/CreFileGenerationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cre-service/src/main/java/org/sid/creapp/services/CreFileGenerationService.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/cre-service/src/test/java/org/sid/creapp/CrEappApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/cre-service/src/test/java/org/sid/creapp/CrEappApplicationTests.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/cre-service/src/main/java/org/sid/creapp/services/ExcelImportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cre-service/src/main/java/org/sid/creapp/services/ExcelImportService.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/gestion-cre/package-lock.json" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/gestion-cre/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gestion-cre/src/app/app.component.ts" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/gestion-cre/src/environments/environment.prod.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gestion-cre/src/environments/environment.prod.ts" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/gestion-cre/tsconfig.app.json" beforeDir="false" afterPath="$PROJECT_DIR$/gestion-cre/tsconfig.app.json" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/gestion-cre/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/gestion-cre/tsconfig.json" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -29,10 +29,10 @@
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+-        <entry key="$PROJECT_DIR$" value="master" />
++        <entry key="$PROJECT_DIR$" value="v-functional" />
+       </map>
+     </option>
+-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/cre-service" />
++    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+     <option name="ROOT_SYNC" value="DONT_SYNC" />
+   </component>
+   <component name="JpbToolWindowState">
+@@ -56,35 +56,40 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RequestMappingsPanelOrder0": "0",
+-    "RequestMappingsPanelOrder1": "1",
+-    "RequestMappingsPanelWidth0": "75",
+-    "RequestMappingsPanelWidth1": "75",
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "Spring Boot.AuthServiceApplication (1).executor": "Run",
+-    "Spring Boot.AuthServiceApplication.executor": "Run",
+-    "Spring Boot.CrEappApplication.executor": "Run",
+-    "Spring Boot.EurekaServerApplication.executor": "Run",
+-    "com.codeium.enabled": "true",
+-    "git-widget-placeholder": "main",
+-    "jdk.selected.JAVA_MODULE": "openjdk-22",
+-    "kotlin-language-version-configured": "true",
+-    "last_opened_file_path": "C:/Users/User/Downloads/ProjetBp_micro_services/cre-service",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "run.configurations.included.in.services": "true",
+-    "settings.editor.selected.configurable": "Errors",
+-    "ts.external.directory.path": "C:\\Users\\User\\Downloads\\ProjetBp_micro_services\\gestion-cre\\node_modules\\typescript\\lib",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;JUnit.CrEappApplicationTests.executor&quot;: &quot;Run&quot;,
++    &quot;JUnit.StructureCREControllerTest.executor&quot;: &quot;Run&quot;,
++    &quot;JUnit.StructureCREServiceTest.executor&quot;: &quot;Run&quot;,
++    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
++    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
++    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
++    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
++    &quot;Spring Boot.AuthServiceApplication (1).executor&quot;: &quot;Run&quot;,
++    &quot;Spring Boot.AuthServiceApplication.executor&quot;: &quot;Run&quot;,
++    &quot;Spring Boot.CrEappApplication (1).executor&quot;: &quot;Run&quot;,
++    &quot;Spring Boot.CrEappApplication.executor&quot;: &quot;Run&quot;,
++    &quot;Spring Boot.EurekaServerApplication.executor&quot;: &quot;Run&quot;,
++    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;c4b3ca31&quot;,
++    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-22&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Downloads/ProjetBp_micro_services/cre-service&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;,
++    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\User\\Downloads\\ProjetBp_micro_services\\gestion-cre\\node_modules\\typescript\\lib&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
+       <recent name="C:\Users\User\Downloads\ProjetBp_micro_services\auth-service" />
+@@ -99,7 +104,59 @@
+       </set>
+     </option>
+   </component>
+-  <component name="RunManager" selected="Spring Boot.AuthServiceApplication">
++  <component name="RunManager" selected="Spring Boot.CrEappApplication">
++    <configuration name="CrEappApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="cre-service (1)" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="org.sid.creapp.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="org.sid.creapp" />
++      <option name="MAIN_CLASS_NAME" value="org.sid.creapp.CrEappApplicationTests" />
++      <option name="TEST_OBJECT" value="class" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="StructureCREControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="cre-service (1)" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="org.sid.creapp.Controllers.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="org.sid.creapp.Controllers" />
++      <option name="MAIN_CLASS_NAME" value="org.sid.creapp.Controllers.StructureCREControllerTest" />
++      <option name="TEST_OBJECT" value="class" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="StructureCREServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="cre-service (1)" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="org.sid.creapp.services.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="org.sid.creapp.services" />
++      <option name="MAIN_CLASS_NAME" value="org.sid.creapp.services.StructureCREServiceTest" />
++      <option name="TEST_OBJECT" value="class" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
++      <module name="api-gateway" />
++      <option name="SPRING_BOOT_MAIN_CLASS" value="org.sid.apigateway.ApiGatewayApplication" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
+     <configuration name="AuthServiceApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+       <module name="auth-service (1)" />
+       <option name="SPRING_BOOT_MAIN_CLASS" value="org.sid.authservice.AuthServiceApplication" />
+@@ -125,7 +182,7 @@
+       </method>
+     </configuration>
+     <configuration name="CrEappApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+-      <module name="cre-service" />
++      <module name="cre-service (1)" />
+       <option name="SPRING_BOOT_MAIN_CLASS" value="org.sid.creapp.CrEappApplication" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+@@ -166,12 +223,23 @@
+       </method>
+     </configuration>
+     <list>
++      <item itemvalue="JUnit.StructureCREServiceTest" />
++      <item itemvalue="JUnit.CrEappApplicationTests" />
++      <item itemvalue="JUnit.StructureCREControllerTest" />
++      <item itemvalue="Spring Boot.ApiGatewayApplication" />
+       <item itemvalue="Spring Boot.CrEappApplication (1)" />
+       <item itemvalue="Spring Boot.AuthServiceApplication (1)" />
+       <item itemvalue="Spring Boot.CrEappApplication" />
+       <item itemvalue="Spring Boot.AuthServiceApplication" />
+       <item itemvalue="Spring Boot.EurekaServerApplication" />
+     </list>
++    <recent_temporary>
++      <list>
++        <item itemvalue="JUnit.StructureCREServiceTest" />
++        <item itemvalue="JUnit.CrEappApplicationTests" />
++        <item itemvalue="JUnit.StructureCREControllerTest" />
++      </list>
++    </recent_temporary>
+   </component>
+   <component name="SharedIndexes">
+     <attachedChunks>
+@@ -222,7 +290,16 @@
+       <workItem from="1746429609829" duration="2088000" />
+       <workItem from="1746450566542" duration="387000" />
+       <workItem from="1746516165201" duration="22000" />
+-      <workItem from="1746516702893" duration="4167000" />
++      <workItem from="1746516702893" duration="7619000" />
++      <workItem from="1746536901308" duration="70000" />
++      <workItem from="1746537044422" duration="6115000" />
++      <workItem from="1746602522476" duration="3769000" />
++      <workItem from="1746624535134" duration="1462000" />
++      <workItem from="1746628349278" duration="1203000" />
++      <workItem from="1746689027379" duration="3637000" />
++      <workItem from="1746700715889" duration="1146000" />
++      <workItem from="1746710384325" duration="3949000" />
++      <workItem from="1746775062890" duration="477000" />
+     </task>
+     <task id="LOCAL-00001" summary="commit du 23/04/2025 à 11h30">
+       <option name="closed" value="true" />
+@@ -232,15 +309,35 @@
+       <option name="project" value="LOCAL" />
+       <updated>1745404242848</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="commit du 06/05/2025 à 11h10">
++      <option name="closed" value="true" />
++      <created>1746526512010</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1746526512012</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
++  </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="MAIN">
++          <value>
++            <State />
++          </value>
++        </entry>
++      </map>
++    </option>
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="commit du 23/04/2025 à 11h30" />
+     <MESSAGE value="commit du 02/05/2025 à 11h30" />
+-    <option name="LAST_COMMIT_MESSAGE" value="commit du 02/05/2025 à 11h30" />
++    <MESSAGE value="commit du 06/05/2025 à 11h10" />
++    <option name="LAST_COMMIT_MESSAGE" value="commit du 06/05/2025 à 11h10" />
+   </component>
+ </project>
+\ No newline at end of file
