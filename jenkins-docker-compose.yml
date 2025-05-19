@@ -1,7 +1,8 @@
 version: '3'
 services:
   jenkins:
-    image: jenkins/jenkins:lts
+    image: jenkins/jenkins:lts-jdk17
+    user: root
     container_name: jenkins
     ports:
       - "7080:8080"  # Port principal de Jenkins (modifié pour éviter les conflits avec vos autres services)
@@ -10,11 +11,13 @@ services:
       - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock  # Pour permettre à Jenkins d'utiliser Docker
       - C:/Users/User/Downloads/ProjetBp_micro_services:/var/jenkins_project  # Monter le dossier du projet
+      - ./jenkins-init.sh:/usr/local/bin/jenkins-init.sh
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false  # Désactive l'assistant d'installation
     restart: always
     networks:
       - bp-network
+    command: ["/bin/bash", "-c", "chmod +x /usr/local/bin/jenkins-init.sh && /usr/local/bin/jenkins-init.sh && /usr/local/bin/jenkins.sh"]
 
 networks:
   bp-network:
